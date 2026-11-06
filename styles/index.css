@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@200;300;400;500;600&family=Cinzel:wght@500;600;700&family=Shippori+Mincho:wght@500;700&display=swap");
+
+:root {
+  --lain-bg: #0b0f0d; --lain-fg: #7fffb5; --lain-ink: #e8fff3; --lain-dim: #2a4a38;
+  --eva-bg: #0a0511; --eva-fg: #ff3a2f; --eva-amber: #f7b500; --eva-ink: #f6e9e3;
+  --frieren-bg: #0d1420; --frieren-fg: #a5b3cf; --frieren-gold: #d4af6b; --frieren-ink: #e8ecf4;
+  --vinland-bg: #14100c; --vinland-fg: #d7c7a3; --vinland-red: #8b2d2d; --vinland-ink: #f3ead6;
+  --elden-bg: #1a1410; --elden-fg: #c9a159; --elden-ink: #e8d9b0;
+  --vapor-mag: #ff2ec3; --vapor-cyan: #2ef5ff;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Cinzel", serif;
+  --font-jp: "Shippori Mincho", "Noto Serif JP", serif;
+  --accent: var(--lain-fg);
+  --accent-soft: rgba(127, 255, 181, .18);
+}
+
+/* ---------- base ---------- */
+.slidev-layout {
+  background: var(--lain-bg);
+  color: var(--lain-ink);
+  font-family: var(--font-body);
+  padding: 3.1rem 3rem 2.6rem !important;
+  position: relative;
+}
+.slidev-layout > * { position: relative; z-index: 1; }
+.slidev-layout h1, .slidev-layout h2, .slidev-layout h3 {
+  font-family: var(--font-body); font-weight: 300; letter-spacing: -.02em; text-transform: lowercase;
+}
+.slidev-layout h1 { font-size: 3.2rem; line-height: 1.05; margin: 0 0 1.1rem; color: var(--accent); }
+.slidev-layout h2 { font-size: 1.9rem; opacity: .82; }
+.slidev-layout h3 { font-size: 1.15rem; opacity: .9; font-family: var(--font-mono); letter-spacing: .06em; color: var(--accent); margin-bottom: .5rem; }
+.slidev-layout p, .slidev-layout li { font-size: 1.05rem; line-height: 1.55; font-weight: 300; }
+.slidev-layout strong, .slidev-layout b { font-weight: 500; color: var(--accent); }
+.slidev-layout code, .slidev-layout pre { font-family: var(--font-mono); }
+.slidev-layout :not(pre) > code { background: var(--accent-soft); color: var(--accent); padding: .05em .35em; border-radius: 3px; font-size: .9em; }
+.slidev-layout ol, .slidev-layout ul { padding-left: 1.2rem; }
+.slidev-layout li::marker { color: var(--accent); font-family: var(--font-mono); }
+.slidev-layout a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed currentColor; }
+
+/* tablas: mono, filas punteadas */
+.slidev-layout table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+.slidev-layout th {
+  font-family: var(--font-mono); font-weight: 500; text-transform: lowercase; letter-spacing: .06em;
+  color: var(--accent); text-align: left; border-bottom: 1px solid var(--accent-soft); padding: .45rem .6rem;
+}
+.slidev-layout td { border-bottom: 1px dashed var(--accent-soft); padding: .45rem .6rem; font-weight: 300; vertical-align: top; }
+.slidev-layout tr:last-child td { border-bottom: 0; }
+
+/* ---------- helpers ---------- */
+.kv { font-family: var(--font-mono); font-size: 1rem; }
+.kv > div { display: flex; gap: 1rem; padding: .3rem 0; border-bottom: 1px dashed var(--accent-soft); opacity: .88; }
+.kv > div:last-child { border-bottom: 0; }
+.kv .k { color: var(--accent); flex: 0 0 9.5rem; }
+
+.rows { display: flex; flex-direction: column; gap: .4rem; font-family: var(--font-mono); }
+.rows .r { padding: .35rem 0; border-bottom: 1px dashed var(--accent-soft); display: flex; flex-direction: column; gap: .1rem; }
+.rows .name { color: var(--accent); font-size: 1rem; font-weight: 500; letter-spacing: .04em; }
+.rows .what { font-size: .82rem; opacity: .8; font-family: var(--font-body); font-weight: 300; }
+
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip { font-family: var(--font-mono); font-size: .8rem; padding: .3rem .7rem; border: 1px solid currentColor; border-radius: 999px; opacity: .75; }
+
+.box { border: 1px solid var(--accent-soft); border-radius: 6px; padding: .8rem 1rem; background: rgba(0,0,0,.25); }
+.box.hot { border-color: var(--accent); box-shadow: 0 0 25px var(--accent-soft); }
+.slidev-layout .note, .note { font-family: var(--font-mono); font-size: .85rem; opacity: .7; letter-spacing: .02em; }
+.slidev-layout pre.ascii, .ascii { margin: 0; background: transparent; font-family: var(--font-mono); font-size: .85rem; line-height: 1.25; white-space: pre; opacity: .85; color: var(--accent); }
+.big-quote { font-size: 1.7rem; font-weight: 200; line-height: 1.45; }
+
+/* ---------- temas por slide ---------- */
+.slidev-layout.theme-lain { background: var(--lain-bg); color: var(--lain-ink); }
+.slidev-layout.theme-lain h1 { text-shadow: 0 0 20px rgba(127,255,181,.35); }
+
+.slidev-layout.theme-eva { background: var(--eva-bg); color: var(--eva-ink); --accent: var(--eva-amber); --accent-soft: rgba(247,181,0,.2); }
+.slidev-layout.theme-eva h1 { color: var(--eva-fg); }
+
+.slidev-layout.theme-frieren { background: var(--frieren-bg); color: var(--frieren-ink); --accent: var(--frieren-gold); --accent-soft: rgba(212,175,107,.22); }
+.slidev-layout.theme-frieren h1 { font-family: var(--font-display); font-weight: 500; text-shadow: 0 0 25px rgba(212,175,107,.25); }
+
+.slidev-layout.theme-vinland { background: var(--vinland-bg); color: var(--vinland-ink); --accent: var(--vinland-fg); --accent-soft: rgba(215,199,163,.2); }
+.slidev-layout.theme-vinland h1 { font-family: var(--font-display); font-weight: 500; }
+
+.slidev-layout.theme-elden { background: var(--elden-bg); color: var(--elden-ink); --accent: var(--elden-fg); --accent-soft: rgba(201,161,89,.22); }
+.slidev-layout.theme-elden h1 { font-family: var(--font-display); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-shadow: 0 0 30px rgba(201,161,89,.3); }
+
+/* ---------- capas atmosféricas ---------- */
+.slidev-layout.layer-vaporwave::after,
+.slidev-layout.layer-cyberpunk::after,
+.slidev-layout.layer-solarpunk::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.slidev-layout.layer-vaporwave::after {
+  background: linear-gradient(180deg, transparent 0%, transparent 70%, rgba(255,46,195,.1) 90%, rgba(46,245,255,.08) 100%),
+              linear-gradient(0deg, rgba(166,77,255,.04), transparent 50%);
+}
+.slidev-layout.layer-cyberpunk::after {
+  background: radial-gradient(ellipse at 20% 110%, rgba(0,229,255,.1), transparent 60%),
+              radial-gradient(ellipse at 90% 0%, rgba(255,0,68,.06), transparent 50%);
+}
+.slidev-layout.layer-solarpunk::after {
+  background: radial-gradient(ellipse at 80% 100%, rgba(106,176,76,.1), transparent 60%),
+              radial-gradient(ellipse at 15% 20%, rgba(247,181,0,.06), transparent 55%);
+}
+
+/* glifo decorativo en esquina */
+.corner-glyph { position: absolute; top: 2rem; right: 2.5rem; font-family: var(--font-jp); font-size: 1.4rem; color: var(--accent); opacity: .45; letter-spacing: .1em; z-index: 2; }
+
+/* mermaid sobre fondo oscuro */
+.slidev-layout .mermaid { display: flex; justify-content: center; }
+
+::selection { background: var(--lain-fg); color: var(--lain-bg); }
