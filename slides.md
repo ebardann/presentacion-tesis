@@ -155,35 +155,24 @@ class: theme-navy layer-warm
 
 ---
 class: theme-green layer-cool
+clicks: 2
 ---
-
-
 
 # activation patching
 
-<Slashes :items="['capturar', 'modificar', 'reanudar']" />
+<ContactGlyph />
 
-ver la red como $f(x) = g(h(x))$ · $h$ = activación intermedia · $g$ = resto (incl. difusión)
+<Slashes :items="['clean', 'corrupted', 'patched']" />
 
-$$
-h' = h_{\text{target}} + m \odot (h_{\text{source}} - h_{\text{target}})
-$$
+<div class="note" style="margin:-.9rem 0 .2rem">
 
-<div class="grid grid-cols-2 gap-8 mt-2">
-<div class="kv">
-  <div><span class="k">m · tokens</span> pares (i, j)</div>
-  <div><span class="k">m · canales</span> dirección de feature</div>
-  <div><span class="k">m · capa</span> bloque pairformer</div>
-  <div><span class="k">m · recycle</span> iteración</div>
-</div>
-<div class="kv">
-  <div><span class="k">ablación</span> cero · media · proyectar fuera</div>
-  <div><span class="k">rescate</span> restaurar tras ablar</div>
-  <div><span class="k">steering</span> sumar α · dirección</div>
-</div>
+$f(x) = g(h(x))$ &nbsp;·&nbsp; $h' = h_{\text{target}} + m \odot (h_{\text{source}} - h_{\text{target}})$
+
 </div>
 
-<p class="note mt-5">h_source = corrida pareada (misma secuencia, otro msa). fuente, máscara y magnitud <b>son parte de la hipótesis</b>.</p>
+<PatchingRuns />
+
+<p class="note mt-2">mismo seed en las tres corridas · fuente, máscara y magnitud <b>son parte de la hipótesis</b></p>
 
 ---
 class: theme-sand layer-warm
