@@ -16,7 +16,7 @@ drawings:
 transition: fade
 duration: 30min
 layout: default
-class: theme-lain
+class: theme-green
 ---
 
 <Cover
@@ -31,7 +31,7 @@ Basado en el field assessment del 14 oct 2026 (assessment.pdf).
 -->
 
 ---
-class: theme-frieren layer-solarpunk
+class: theme-navy layer-warm
 ---
 
 
@@ -55,7 +55,7 @@ El assessment lo identifica como la oportunidad abierta más fuerte en MI de pre
 -->
 
 ---
-class: theme-lain layer-cyberpunk
+class: theme-green layer-cool
 ---
 
 # decisiones
@@ -71,7 +71,7 @@ class: theme-lain layer-cyberpunk
 </div>
 
 ---
-class: theme-eva layer-cyberpunk
+class: theme-red layer-cool
 ---
 
 # el gap
@@ -90,7 +90,7 @@ class: theme-eva layer-cyberpunk
 la contribución: explicar un efecto selectivo <b>y su transmisión</b>, con held-out y controles.</p>
 
 ---
-class: theme-lain layer-vaporwave
+class: theme-green layer-pink
 ---
 
 # pipeline af3
@@ -115,7 +115,7 @@ flowchart LR
 recycles / pasos / samples por seed se leen del config instalado — no se asumen.</p>
 
 ---
-class: theme-frieren layer-solarpunk
+class: theme-navy layer-warm
 ---
 
 # representaciones
@@ -154,7 +154,7 @@ class: theme-frieren layer-solarpunk
 </div>
 
 ---
-class: theme-lain layer-cyberpunk
+class: theme-green layer-cool
 ---
 
 
@@ -186,7 +186,7 @@ $$
 <p class="note mt-5">h_source = corrida pareada (misma secuencia, otro msa). fuente, máscara y magnitud <b>son parte de la hipótesis</b>.</p>
 
 ---
-class: theme-vinland layer-solarpunk
+class: theme-sand layer-warm
 ---
 
 # features y evidencia
@@ -225,7 +225,7 @@ superposición: un canal ≠ un concepto.</p>
 <p class="note mt-6">un mecanismo describe <b>al predictor</b>, no la dinámica real del plegamiento.</p>
 
 ---
-class: theme-eva layer-cyberpunk
+class: theme-red layer-cool
 ---
 
 <div class="corner-glyph">仮説</div>
@@ -252,7 +252,7 @@ flowchart LR
 <p class="note mt-4">riesgo principal: la información está <b>distribuida</b> — no existe una feature pequeña y localizada.</p>
 
 ---
-class: theme-lain layer-vaporwave
+class: theme-green layer-pink
 ---
 
 # protocolo
@@ -270,7 +270,7 @@ class: theme-lain layer-vaporwave
 </div>
 
 ---
-class: theme-elden layer-solarpunk
+class: theme-bronze layer-warm
 ---
 
 # controles
@@ -297,7 +297,7 @@ class: theme-elden layer-solarpunk
 </div>
 
 ---
-class: theme-frieren layer-cyberpunk
+class: theme-navy layer-cool
 ---
 
 # endpoints
@@ -316,7 +316,7 @@ class: theme-frieren layer-cyberpunk
 <p class="note mt-4">diferencias chicas sin barras de error no son resultados.</p>
 
 ---
-class: theme-lain layer-cyberpunk
+class: theme-green layer-cool
 ---
 
 # cómputo
@@ -346,7 +346,7 @@ reutilizar cómputo upstream al parchear tarde.</p>
 </div>
 
 ---
-class: theme-vinland layer-solarpunk
+class: theme-sand layer-warm
 ---
 
 # estado
@@ -371,7 +371,7 @@ class: theme-vinland layer-solarpunk
 
 ---
 layout: center
-class: theme-elden layer-vaporwave text-center
+class: theme-bronze layer-pink text-center
 ---
 
 # gracias

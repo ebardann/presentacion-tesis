@@ -1,24 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@200;300;400;500;600&family=Cinzel:wght@500;600;700&family=Shippori+Mincho:wght@500;700&display=swap");
 
 :root {
-  --lain-bg: #0b0f0d; --lain-fg: #7fffb5; --lain-ink: #e8fff3; --lain-dim: #2a4a38;
-  --eva-bg: #0a0511; --eva-fg: #ff3a2f; --eva-amber: #f7b500; --eva-ink: #f6e9e3;
-  --frieren-bg: #0d1420; --frieren-fg: #a5b3cf; --frieren-gold: #d4af6b; --frieren-ink: #e8ecf4;
-  --vinland-bg: #14100c; --vinland-fg: #d7c7a3; --vinland-red: #8b2d2d; --vinland-ink: #f3ead6;
-  --elden-bg: #1a1410; --elden-fg: #c9a159; --elden-ink: #e8d9b0;
-  --vapor-mag: #ff2ec3; --vapor-cyan: #2ef5ff;
+  --green-bg: #0b0f0d; --green-fg: #7fffb5; --green-ink: #e8fff3; --green-dim: #2a4a38;
+  --red-bg: #0a0511; --red-fg: #ff3a2f; --red-amber: #f7b500; --red-ink: #f6e9e3;
+  --navy-bg: #0d1420; --navy-fg: #a5b3cf; --navy-gold: #d4af6b; --navy-ink: #e8ecf4;
+  --sand-bg: #14100c; --sand-fg: #d7c7a3; --sand-red: #8b2d2d; --sand-ink: #f3ead6;
+  --bronze-bg: #1a1410; --bronze-fg: #c9a159; --bronze-ink: #e8d9b0;
+  --neon-mag: #ff2ec3; --neon-cyan: #2ef5ff;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --font-body: "Inter", system-ui, sans-serif;
   --font-display: "Cinzel", serif;
   --font-jp: "Shippori Mincho", "Noto Serif JP", serif;
-  --accent: var(--lain-fg);
+  --accent: var(--green-fg);
   --accent-soft: rgba(127, 255, 181, .18);
 }
 
 /* ---------- base ---------- */
 .slidev-layout {
-  background: var(--lain-bg);
-  color: var(--lain-ink);
+  background: var(--green-bg);
+  color: var(--green-ink);
   font-family: var(--font-body);
   padding: 3.1rem 3rem 2.6rem !important;
   position: relative;
@@ -68,34 +68,34 @@
 .big-quote { font-size: 1.7rem; font-weight: 200; line-height: 1.45; }
 
 /* ---------- temas por slide ---------- */
-.slidev-layout.theme-lain { background: var(--lain-bg); color: var(--lain-ink); }
-.slidev-layout.theme-lain h1 { text-shadow: 0 0 20px rgba(127,255,181,.35); }
+.slidev-layout.theme-green { background: var(--green-bg); color: var(--green-ink); }
+.slidev-layout.theme-green h1 { text-shadow: 0 0 20px rgba(127,255,181,.35); }
 
-.slidev-layout.theme-eva { background: var(--eva-bg); color: var(--eva-ink); --accent: var(--eva-amber); --accent-soft: rgba(247,181,0,.2); }
-.slidev-layout.theme-eva h1 { color: var(--eva-fg); }
+.slidev-layout.theme-red { background: var(--red-bg); color: var(--red-ink); --accent: var(--red-amber); --accent-soft: rgba(247,181,0,.2); }
+.slidev-layout.theme-red h1 { color: var(--red-fg); }
 
-.slidev-layout.theme-frieren { background: var(--frieren-bg); color: var(--frieren-ink); --accent: var(--frieren-gold); --accent-soft: rgba(212,175,107,.22); }
-.slidev-layout.theme-frieren h1 { font-family: var(--font-display); font-weight: 500; text-shadow: 0 0 25px rgba(212,175,107,.25); }
+.slidev-layout.theme-navy { background: var(--navy-bg); color: var(--navy-ink); --accent: var(--navy-gold); --accent-soft: rgba(212,175,107,.22); }
+.slidev-layout.theme-navy h1 { font-family: var(--font-display); font-weight: 500; text-shadow: 0 0 25px rgba(212,175,107,.25); }
 
-.slidev-layout.theme-vinland { background: var(--vinland-bg); color: var(--vinland-ink); --accent: var(--vinland-fg); --accent-soft: rgba(215,199,163,.2); }
-.slidev-layout.theme-vinland h1 { font-family: var(--font-display); font-weight: 500; }
+.slidev-layout.theme-sand { background: var(--sand-bg); color: var(--sand-ink); --accent: var(--sand-fg); --accent-soft: rgba(215,199,163,.2); }
+.slidev-layout.theme-sand h1 { font-family: var(--font-display); font-weight: 500; }
 
-.slidev-layout.theme-elden { background: var(--elden-bg); color: var(--elden-ink); --accent: var(--elden-fg); --accent-soft: rgba(201,161,89,.22); }
-.slidev-layout.theme-elden h1 { font-family: var(--font-display); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-shadow: 0 0 30px rgba(201,161,89,.3); }
+.slidev-layout.theme-bronze { background: var(--bronze-bg); color: var(--bronze-ink); --accent: var(--bronze-fg); --accent-soft: rgba(201,161,89,.22); }
+.slidev-layout.theme-bronze h1 { font-family: var(--font-display); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-shadow: 0 0 30px rgba(201,161,89,.3); }
 
 /* ---------- capas atmosféricas ---------- */
-.slidev-layout.layer-vaporwave::after,
-.slidev-layout.layer-cyberpunk::after,
-.slidev-layout.layer-solarpunk::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.slidev-layout.layer-vaporwave::after {
+.slidev-layout.layer-pink::after,
+.slidev-layout.layer-cool::after,
+.slidev-layout.layer-warm::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.slidev-layout.layer-pink::after {
   background: linear-gradient(180deg, transparent 0%, transparent 70%, rgba(255,46,195,.1) 90%, rgba(46,245,255,.08) 100%),
               linear-gradient(0deg, rgba(166,77,255,.04), transparent 50%);
 }
-.slidev-layout.layer-cyberpunk::after {
+.slidev-layout.layer-cool::after {
   background: radial-gradient(ellipse at 20% 110%, rgba(0,229,255,.1), transparent 60%),
               radial-gradient(ellipse at 90% 0%, rgba(255,0,68,.06), transparent 50%);
 }
-.slidev-layout.layer-solarpunk::after {
+.slidev-layout.layer-warm::after {
   background: radial-gradient(ellipse at 80% 100%, rgba(106,176,76,.1), transparent 60%),
               radial-gradient(ellipse at 15% 20%, rgba(247,181,0,.06), transparent 55%);
 }
@@ -106,4 +106,4 @@
 /* mermaid sobre fondo oscuro */
 .slidev-layout .mermaid { display: flex; justify-content: center; }
 
-::selection { background: var(--lain-fg); color: var(--lain-bg); }
+::selection { background: var(--green-fg); color: var(--green-bg); }

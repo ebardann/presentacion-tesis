@@ -45,21 +45,21 @@ defineProps<{ title: string; status?: string[]; sub?: string[]; author?: string 
 }
 .status-bar {
   position: absolute; top: 1.5rem; left: 2.5rem; z-index: 8; display: flex; gap: .7rem; align-items: center;
-  font-family: var(--font-mono); font-size: .8rem; color: var(--lain-fg); letter-spacing: .15em; text-transform: uppercase; opacity: .88;
+  font-family: var(--font-mono); font-size: .8rem; color: var(--green-fg); letter-spacing: .15em; text-transform: uppercase; opacity: .88;
 }
 .status-bar .sep { opacity: .35; }
-.dot-live { width: 8px; height: 8px; border-radius: 999px; background: var(--lain-fg); box-shadow: 0 0 10px var(--lain-fg); animation: pulse 1.4s ease-in-out infinite; }
+.dot-live { width: 8px; height: 8px; border-radius: 999px; background: var(--green-fg); box-shadow: 0 0 10px var(--green-fg); animation: pulse 1.4s ease-in-out infinite; }
 .handle-big {
   position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%); z-index: 7;
-  font-family: var(--font-mono); font-size: 6.5rem; font-weight: 300; color: var(--lain-fg);
+  font-family: var(--font-mono); font-size: 6.5rem; font-weight: 300; color: var(--green-fg);
   letter-spacing: .12em; line-height: 1; display: flex; align-items: center; white-space: nowrap;
 }
 .handle-big .u { display: inline-block; text-shadow: 0 0 20px rgba(127,255,181,.6), 0 0 60px rgba(127,255,181,.4), 0 0 3px rgba(46,245,255,.8); animation: flicker 6s infinite; }
 .handle-big .cursor { margin-left: .15em; animation: blink 1s steps(1) infinite; }
-.sub { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 8; text-align: center; color: var(--lain-ink); white-space: nowrap; }
+.sub { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 8; text-align: center; color: var(--green-ink); white-space: nowrap; }
 .sub :deep(.slashes) { font-size: 1.05rem; letter-spacing: .15em; margin: 0 0 .6rem; }
 .author { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .2em; opacity: .55; text-transform: lowercase; }
-.glyph { position: absolute; z-index: 7; font-family: var(--font-jp), var(--font-mono); color: var(--lain-fg); opacity: .5; font-size: 1.3rem; letter-spacing: .1em; }
+.glyph { position: absolute; z-index: 7; font-family: var(--font-jp), var(--font-mono); color: var(--green-fg); opacity: .5; font-size: 1.3rem; letter-spacing: .1em; }
 .glyph.tl { top: 2.5rem; right: 2.5rem; }
 .glyph.tr { top: 16%; left: 3rem; font-size: 2.2rem; opacity: .18; }
 .glyph.bl { bottom: 3rem; left: 2.5rem; font-size: 1.1rem; opacity: .6; }

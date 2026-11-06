@@ -13,16 +13,16 @@ const { currentPage, total, currentSlideRoute } = useNav()
 
 // color según el tema (class) de la slide actual
 const palette: Record<string, string> = {
-  'theme-lain': '#7fffb5',
-  'theme-eva': '#f7b500',
-  'theme-frieren': '#d4af6b',
-  'theme-vinland': '#d7c7a3',
-  'theme-elden': '#c9a159',
+  'theme-green': '#7fffb5',
+  'theme-red': '#f7b500',
+  'theme-navy': '#d4af6b',
+  'theme-sand': '#d7c7a3',
+  'theme-bronze': '#c9a159',
 }
 const color = computed(() => {
   const cls = String(currentSlideRoute.value?.meta?.slide?.frontmatter?.class ?? '')
   const key = Object.keys(palette).find(k => cls.includes(k))
-  return key ? palette[key] : palette['theme-lain']
+  return key ? palette[key] : palette['theme-green']
 })
 const hidden = computed(() => currentPage.value === 1)
 const pad = (n: number) => String(n).padStart(2, '0')

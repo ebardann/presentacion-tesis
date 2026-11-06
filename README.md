@@ -48,10 +48,10 @@ Inspirado en [uumami.wiki/presentacion_clase_esponda](https://uumami.wiki/presen
 fondo oscuro, títulos en minúscula (Inter ligera), etiquetas en IBM Plex Mono, Cinzel como display.
 
 - **Temas por slide** — se eligen con `class:` en el frontmatter de cada slide:
-  `theme-lain` (verde) · `theme-eva` (rojo/ámbar) · `theme-frieren` (dorado, Cinzel) ·
-  `theme-vinland` (tierra) · `theme-elden` (dorado, mayúsculas).
-- **Capas atmosféricas** — se combinan con el tema: `layer-cyberpunk` · `layer-vaporwave` · `layer-solarpunk`.
-  Ejemplo: `class: theme-eva layer-cyberpunk`.
+  `theme-green` (verde) · `theme-red` (rojo/ámbar) · `theme-navy` (dorado, Cinzel) ·
+  `theme-sand` (tierra) · `theme-bronze` (dorado, mayúsculas).
+- **Capas atmosféricas** — se combinan con el tema: `layer-cool` · `layer-pink` · `layer-warm`.
+  Ejemplo: `class: theme-red layer-cool`.
 - **Clases de contenido** (en `styles/index.css`):
   `kv` (clave · valor), `rows` / `.r` / `.name` / `.what` (filas punteadas), `chips` / `chip`,
   `box` / `box hot`, `note`, `ascii` (usar con `<pre>`), `big-quote`, `corner-glyph`.
