@@ -16,7 +16,7 @@ drawings:
 transition: fade
 duration: 30min
 layout: default
-class: theme-green
+class: theme-solar tone-sun
 ---
 
 <Cover
@@ -31,7 +31,7 @@ Basado en el field assessment del 14 oct 2026 (assessment.pdf).
 -->
 
 ---
-class: theme-navy layer-warm
+class: theme-solar tone-leaf
 ---
 
 
@@ -55,7 +55,7 @@ El assessment lo identifica como la oportunidad abierta más fuerte en MI de pre
 -->
 
 ---
-class: theme-green layer-cool
+class: theme-solar tone-teal
 ---
 
 # decisiones
@@ -71,7 +71,7 @@ class: theme-green layer-cool
 </div>
 
 ---
-class: theme-red layer-cool
+class: theme-solar tone-coral
 ---
 
 # el gap
@@ -90,7 +90,7 @@ class: theme-red layer-cool
 la contribución: explicar un efecto selectivo <b>y su transmisión</b>, con held-out y controles.</p>
 
 ---
-class: theme-green layer-pink
+class: theme-solar tone-sun
 ---
 
 # pipeline af3
@@ -106,16 +106,16 @@ flowchart LR
   E --> F[coordenadas X]
   D --> G[distogram head]
   E --> H[confidence<br/>plddt · pae · iptm]
-  style D fill:#1b2a10,stroke:#f7b500,color:#f6e9e3
-  style E fill:#0b1d22,stroke:#2ef5ff,color:#e8fff3
-  style F fill:#0f2a1c,stroke:#7fffb5,color:#7fffb5
+  style D fill:#221c08,stroke:#ffc24b,color:#f1ecd8
+  style E fill:#0a201e,stroke:#3fd9c7,color:#f1ecd8
+  style F fill:#12240c,stroke:#8fe36a,color:#8fe36a
 ```
 
 <p class="note mt-6">recycling y pasos de difusión = cómputo del modelo, no tiempo físico de plegamiento.
 recycles / pasos / samples por seed se leen del config instalado — no se asumen.</p>
 
 ---
-class: theme-navy layer-warm
+class: theme-solar tone-leaf
 ---
 
 # representaciones
@@ -154,7 +154,7 @@ class: theme-navy layer-warm
 </div>
 
 ---
-class: theme-green layer-cool
+class: theme-solar tone-teal
 clicks: 2
 ---
 
@@ -175,7 +175,7 @@ $f(x) = g(h(x))$ &nbsp;·&nbsp; $h' = h_{\text{target}} + m \odot (h_{\text{sour
 <p class="note mt-2">mismo seed en las tres corridas · fuente, máscara y magnitud <b>son parte de la hipótesis</b></p>
 
 ---
-class: theme-sand layer-warm
+class: theme-solar tone-sun
 ---
 
 # features y evidencia
@@ -214,7 +214,7 @@ superposición: un canal ≠ un concepto.</p>
 <p class="note mt-6">un mecanismo describe <b>al predictor</b>, no la dinámica real del plegamiento.</p>
 
 ---
-class: theme-red layer-cool
+class: theme-solar tone-coral
 ---
 
 # diseño principal
@@ -232,14 +232,14 @@ flowchart LR
   S[msa superficial<br/>contacto perdido] -->|h_target| P
   P --> R[reanudar pairformer<br/>+ difusión · seeds fijas]
   R --> M[¿vuelve d i,j en<br/>coordenadas finales?]
-  style P fill:#2a0a08,stroke:#ff3a2f,color:#ff3a2f
-  style M fill:#1f1800,stroke:#f7b500,color:#f7b500
+  style P fill:#2a110c,stroke:#ff6f59,color:#ff6f59
+  style M fill:#221c08,stroke:#ffc24b,color:#ffc24b
 ```
 
 <p class="note mt-4">riesgo principal: la información está <b>distribuida</b> — no existe una feature pequeña y localizada.</p>
 
 ---
-class: theme-green layer-pink
+class: theme-solar tone-leaf
 ---
 
 # protocolo
@@ -261,7 +261,7 @@ class: theme-green layer-pink
 </div>
 
 ---
-class: theme-bronze layer-warm
+class: theme-solar tone-sun
 ---
 
 # controles
@@ -288,7 +288,7 @@ class: theme-bronze layer-warm
 </div>
 
 ---
-class: theme-navy layer-cool
+class: theme-solar tone-teal
 ---
 
 # endpoints
@@ -307,7 +307,7 @@ class: theme-navy layer-cool
 <p class="note mt-4">diferencias chicas sin barras de error no son resultados.</p>
 
 ---
-class: theme-green layer-cool
+class: theme-solar tone-leaf
 ---
 
 # cómputo
@@ -337,7 +337,7 @@ reutilizar cómputo upstream al parchear tarde.</p>
 </div>
 
 ---
-class: theme-sand layer-warm
+class: theme-solar tone-teal
 ---
 
 # estado
@@ -362,10 +362,12 @@ class: theme-sand layer-warm
 
 ---
 layout: center
-class: theme-bronze layer-pink text-center
+class: theme-solar tone-teal text-center
 ---
 
-# gracias
+<GlitchBg image="closing-bg.png" :opacity="0.75" :dim="0.6" />
+
+# <span class="glitch" data-text="gracias">gracias</span>
 
 <p class="big-quote mt-6" style="opacity:.85">
 "af3 usa la feature x para acercar i y j"<br/>

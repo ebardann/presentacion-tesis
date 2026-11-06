@@ -29,13 +29,13 @@ const J = bot[4]
 <style scoped>
 .cg { position: absolute !important; top: 2.2rem; right: 3rem; width: 230px; z-index: 2; }
 svg { width: 100%; height: auto; display: block; overflow: visible; }
-.bb { fill: none; stroke: var(--green-ink); stroke-width: 1.4; opacity: .35; stroke-linejoin: round; }
-.res { fill: var(--green-ink); opacity: .55; }
-.hl { fill: rgba(127, 255, 181, .25); stroke: var(--green-fg); stroke-width: 1.6; }
-.d { stroke: var(--green-fg); stroke-width: 1.4; stroke-dasharray: 3 3; }
-.lab { fill: var(--green-fg); font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
-.dl { fill: var(--green-fg); font-family: var(--font-mono); font-size: 11px; }
-.dim { fill: var(--green-ink); font-family: var(--font-mono); font-size: 9px; opacity: .4; }
+.bb { fill: none; stroke: var(--ink); stroke-width: 1.4; opacity: .35; stroke-linejoin: round; }
+.res { fill: var(--ink); opacity: .55; }
+.hl { fill: rgba(255, 194, 75, .25); stroke: var(--sun); stroke-width: 1.6; }
+.d { stroke: var(--sun); stroke-width: 1.4; stroke-dasharray: 3 3; }
+.lab { fill: var(--sun); font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
+.dl { fill: var(--sun); font-family: var(--font-mono); font-size: 11px; }
+.dim { fill: var(--ink); font-family: var(--font-mono); font-size: 9px; opacity: .4; }
 .cap { font-family: var(--font-mono); font-size: 10px; line-height: 1.35; opacity: .65; margin-top: .25rem; }
 .cap b { font-weight: 500; }
 </style>

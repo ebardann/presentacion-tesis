@@ -47,27 +47,29 @@ npm run export     # PDF — requiere: npm i -D playwright-chromium
 Inspirado en [uumami.wiki/presentacion_clase_esponda](https://uumami.wiki/presentacion_clase_esponda/#/1):
 fondo oscuro, títulos en minúscula (Inter ligera), etiquetas en IBM Plex Mono, Cinzel como display.
 
-- **Temas por slide** — se eligen con `class:` en el frontmatter de cada slide:
-  `theme-green` (verde) · `theme-red` (rojo/ámbar) · `theme-navy` (dorado, Cinzel) ·
-  `theme-sand` (tierra) · `theme-bronze` (dorado, mayúsculas).
-- **Capas atmosféricas** — se combinan con el tema: `layer-cool` · `layer-pink` · `layer-warm`.
-  Ejemplo: `class: theme-red layer-cool`.
+- **Tema único** — `class: theme-solar` en el frontmatter de cada slide (solar/cyber punk):
+  fondo bosque nocturno `#08130f`, texto pergamino `#f1ecd8`, acento dorado solar `#ffc24b`,
+  clorofila `#8fe36a`, teal `#3fd9c7`, coral `#ff6f59`. La paleta vive en `:root` de `styles/index.css`.
+- **Tonos** — cambian el acento entre slides dentro del mismo tema: `tone-sun` · `tone-leaf` · `tone-teal` · `tone-coral`.
+  Ejemplo: `class: theme-solar tone-leaf`. Las barras superior/inferior siguen el tono.
 - **Clases de contenido** (en `styles/index.css`):
   `kv` (clave · valor), `rows` / `.r` / `.name` / `.what` (filas punteadas), `chips` / `chip`,
-  `box` / `box hot`, `note`, `ascii` (usar con `<pre>`), `big-quote`.
+  `box` / `box hot`, `note`, `ascii` (usar con `<pre>`), `big-quote`,
+  `glitch` (texto con glitch rgb: `<span class="glitch" data-text="hola">hola</span>`).
 
 ## Estructura
 
 | Archivo | Función |
 |---|---|
 | `slides.md` | las slides |
-| `styles/index.css` | fuentes, paleta, temas, capas y clases de contenido |
+| `styles/index.css` | fuentes, paleta, tema y clases de contenido |
 | `components/Cover.vue` | portada tipo terminal CRT (título con glow, barra de estado, imagen de fondo `assets/cover-bg.png`) |
 | `components/Slashes.vue` | subtítulo `a / b / c` — `<Slashes :items="['a','b']" />` |
-| `components/Ticker.vue` | barra con texto desplazándose; toma el color del tema de la slide actual |
+| `components/Ticker.vue` | barra con texto desplazándose; toma el color del tono de la slide actual |
 | `global-top.vue` / `global-bottom.vue` | barras superior e inferior (se ocultan en la portada). Editar aquí las frases y la velocidad (`:speed`, segundos por vuelta) |
 | `assets/cover-bg.png` | fondo de la portada (proteína en cintas, estilo neón/glitch) |
-| `assets/fold-bg.png` | fondo alternativo, sin uso: cadena desplegada → ubiquitina plegada (PDB 1UBQ, dominio público). Se regenera con `curl -sLO https://files.rcsb.org/download/1UBQ.pdb && python3 scripts/render_fold.py 1UBQ.pdb assets/fold-bg.png` |
+| `assets/closing-bg.png` | fondo de la última slide (proteína neón azul/verde) |
+| `components/GlitchBg.vue` | fondo de imagen con glitch intermitente — `<GlitchBg image="closing-bg.png" :dim="0.6" />` |
 | `setup/mermaid.ts` | colores oscuros para los diagramas mermaid |
 
 Quedan del template de Slidev y no se usan: `components/Counter.vue`, `pages/imported-slides.md`,

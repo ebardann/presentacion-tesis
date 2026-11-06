@@ -11,18 +11,17 @@ const props = withDefaults(defineProps<{
 
 const { currentPage, total, currentSlideRoute } = useNav()
 
-// color según el tema (class) de la slide actual
+// color según el tono (tone-*) de la slide actual
 const palette: Record<string, string> = {
-  'theme-green': '#7fffb5',
-  'theme-red': '#f7b500',
-  'theme-navy': '#d4af6b',
-  'theme-sand': '#d7c7a3',
-  'theme-bronze': '#c9a159',
+  'tone-sun': '#ffc24b',
+  'tone-leaf': '#8fe36a',
+  'tone-teal': '#3fd9c7',
+  'tone-coral': '#ff6f59',
 }
 const color = computed(() => {
   const cls = String(currentSlideRoute.value?.meta?.slide?.frontmatter?.class ?? '')
   const key = Object.keys(palette).find(k => cls.includes(k))
-  return key ? palette[key] : palette['theme-green']
+  return key ? palette[key] : palette['tone-sun']
 })
 const hidden = computed(() => currentPage.value === 1)
 const pad = (n: number) => String(n).padStart(2, '0')
@@ -52,7 +51,7 @@ const pad = (n: number) => String(n).padStart(2, '0')
   position: absolute; left: 0; right: 0; height: 1.6rem; z-index: 50;
   display: flex; align-items: center; overflow: hidden;
   font-family: var(--font-mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--c); background: rgba(5, 8, 7, .72); backdrop-filter: blur(4px);
+  color: var(--c); background: rgba(6, 14, 11, .74); backdrop-filter: blur(4px);
   transition: color .4s ease;
   pointer-events: none;
 }

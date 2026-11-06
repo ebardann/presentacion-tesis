@@ -1,24 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@200;300;400;500;600&family=Cinzel:wght@500;600;700&family=Shippori+Mincho:wght@500;700&display=swap");
 
 :root {
-  --green-bg: #0b0f0d; --green-fg: #7fffb5; --green-ink: #e8fff3; --green-dim: #2a4a38;
-  --red-bg: #0a0511; --red-fg: #ff3a2f; --red-amber: #f7b500; --red-ink: #f6e9e3;
-  --navy-bg: #0d1420; --navy-fg: #a5b3cf; --navy-gold: #d4af6b; --navy-ink: #e8ecf4;
-  --sand-bg: #14100c; --sand-fg: #d7c7a3; --sand-red: #8b2d2d; --sand-ink: #f3ead6;
-  --bronze-bg: #1a1410; --bronze-fg: #c9a159; --bronze-ink: #e8d9b0;
-  --neon-mag: #ff2ec3; --neon-cyan: #2ef5ff;
+  /* paleta única · solar/cyber punk */
+  --bg: #08130f;      /* bosque nocturno */
+  --ink: #f1ecd8;     /* pergamino cálido */
+  --sun: #ffc24b;     /* dorado solar · acento principal */
+  --leaf: #8fe36a;    /* clorofila */
+  --teal: #3fd9c7;    /* teal cyber */
+  --coral: #ff6f59;   /* coral · error / pérdida */
+  --dim: #23382c;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --font-body: "Inter", system-ui, sans-serif;
   --font-display: "Cinzel", serif;
   --font-jp: "Shippori Mincho", "Noto Serif JP", serif;
-  --accent: var(--green-fg);
-  --accent-soft: rgba(127, 255, 181, .18);
+  --accent: var(--sun);
+  --accent-soft: rgba(255, 194, 75, .2);
 }
 
 /* ---------- base ---------- */
 .slidev-layout {
-  background: var(--green-bg);
-  color: var(--green-ink);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-body);
   padding: 3.1rem 3rem 2.6rem !important;
   position: relative;
@@ -67,41 +69,55 @@
 .slidev-layout pre.ascii, .ascii { margin: 0; background: transparent; font-family: var(--font-mono); font-size: .85rem; line-height: 1.25; white-space: pre; opacity: .85; color: var(--accent); }
 .big-quote { font-size: 1.7rem; font-weight: 200; line-height: 1.45; }
 
-/* ---------- temas por slide ---------- */
-.slidev-layout.theme-green { background: var(--green-bg); color: var(--green-ink); }
-.slidev-layout.theme-green h1 { text-shadow: 0 0 20px rgba(127,255,181,.35); }
-
-.slidev-layout.theme-red { background: var(--red-bg); color: var(--red-ink); --accent: var(--red-amber); --accent-soft: rgba(247,181,0,.2); }
-.slidev-layout.theme-red h1 { color: var(--red-fg); }
-
-.slidev-layout.theme-navy { background: var(--navy-bg); color: var(--navy-ink); --accent: var(--navy-gold); --accent-soft: rgba(212,175,107,.22); }
-.slidev-layout.theme-navy h1 { font-family: var(--font-display); font-weight: 500; text-shadow: 0 0 25px rgba(212,175,107,.25); }
-
-.slidev-layout.theme-sand { background: var(--sand-bg); color: var(--sand-ink); --accent: var(--sand-fg); --accent-soft: rgba(215,199,163,.2); }
-.slidev-layout.theme-sand h1 { font-family: var(--font-display); font-weight: 500; }
-
-.slidev-layout.theme-bronze { background: var(--bronze-bg); color: var(--bronze-ink); --accent: var(--bronze-fg); --accent-soft: rgba(201,161,89,.22); }
-.slidev-layout.theme-bronze h1 { font-family: var(--font-display); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; text-shadow: 0 0 30px rgba(201,161,89,.3); }
-
-/* ---------- capas atmosféricas ---------- */
-.slidev-layout.layer-pink::after,
-.slidev-layout.layer-cool::after,
-.slidev-layout.layer-warm::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.slidev-layout.layer-pink::after {
-  background: linear-gradient(180deg, transparent 0%, transparent 70%, rgba(255,46,195,.1) 90%, rgba(46,245,255,.08) 100%),
-              linear-gradient(0deg, rgba(166,77,255,.04), transparent 50%);
-}
-.slidev-layout.layer-cool::after {
-  background: radial-gradient(ellipse at 20% 110%, rgba(0,229,255,.1), transparent 60%),
-              radial-gradient(ellipse at 90% 0%, rgba(255,0,68,.06), transparent 50%);
-}
-.slidev-layout.layer-warm::after {
-  background: radial-gradient(ellipse at 80% 100%, rgba(106,176,76,.1), transparent 60%),
-              radial-gradient(ellipse at 15% 20%, rgba(247,181,0,.06), transparent 55%);
+/* ---------- tema único: solar/cyber punk ---------- */
+.slidev-layout.theme-solar h1 { text-shadow: 0 0 22px color-mix(in srgb, var(--accent) 35%, transparent); }
+.slidev-layout.theme-solar h3 { color: var(--accent-2); }
+.slidev-layout.theme-solar::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse at 12% 110%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 60%),
+              radial-gradient(ellipse at 92% -5%, color-mix(in srgb, var(--accent-2) 9%, transparent), transparent 55%);
 }
 
+/* tonos: mismo tema, cambia el acento entre slides (class: theme-solar tone-leaf) */
+.slidev-layout.theme-solar { --accent-2: var(--teal); }
+.slidev-layout.tone-sun   { --accent: var(--sun);   --accent-soft: rgba(255,194,75,.2);  --accent-2: var(--teal); }
+.slidev-layout.tone-leaf  { --accent: var(--leaf);  --accent-soft: rgba(143,227,106,.2); --accent-2: var(--sun); }
+.slidev-layout.tone-teal  { --accent: var(--teal);  --accent-soft: rgba(63,217,199,.2);  --accent-2: var(--leaf); }
+.slidev-layout.tone-coral { --accent: var(--coral); --accent-soft: rgba(255,111,89,.2);  --accent-2: var(--sun); }
 
 /* mermaid sobre fondo oscuro */
 .slidev-layout .mermaid { display: flex; justify-content: center; }
 
-::selection { background: var(--green-fg); color: var(--green-bg); }
+::selection { background: var(--sun); color: var(--bg); }
+
+/* ---------- glitch de texto: <h1 class="glitch" data-text="hola">hola</h1> ---------- */
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after {
+  content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  pointer-events: none; opacity: 0;
+}
+.glitch::before { color: var(--teal); text-shadow: none; animation: glitch-a 4.2s infinite steps(1); }
+.glitch::after  { color: var(--coral); text-shadow: none; animation: glitch-b 4.2s infinite steps(1); }
+@keyframes glitch-a {
+  0%, 100% { opacity: 0; }
+  70% { opacity: .9; clip-path: inset(10% 0 60% 0); transform: translate(-4px, -1px); }
+  71% { opacity: .9; clip-path: inset(55% 0 20% 0); transform: translate(5px, 0); }
+  72% { opacity: .9; clip-path: inset(30% 0 45% 0); transform: translate(-3px, 1px); }
+  73% { opacity: 0; }
+  92% { opacity: .8; clip-path: inset(70% 0 5% 0); transform: translate(3px, 0); }
+  93% { opacity: 0; }
+}
+@keyframes glitch-b {
+  0%, 100% { opacity: 0; }
+  70% { opacity: .85; clip-path: inset(60% 0 15% 0); transform: translate(4px, 1px); }
+  71% { opacity: .85; clip-path: inset(5% 0 75% 0); transform: translate(-5px, 0); }
+  72% { opacity: .85; clip-path: inset(40% 0 35% 0); transform: translate(3px, -1px); }
+  73% { opacity: 0; }
+  92% { opacity: .7; clip-path: inset(15% 0 70% 0); transform: translate(-3px, 0); }
+  93% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .glitch::before, .glitch::after { animation: none; } }
+
+/* GlitchBg dentro del layout center: el fondo cubre toda la slide */
+.slidev-layout.center > :has(> .glitch-bg) { position: static; }
+.slidev-layout.center > :has(> .glitch-bg) > :not(.glitch-bg) { position: relative; z-index: 1; }

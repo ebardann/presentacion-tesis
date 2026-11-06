@@ -86,26 +86,26 @@ function blockClass(kind: string, i: number) {
 </template>
 
 <style scoped>
-.pr { width: 100%; height: auto; max-height: 275px; display: block; color: var(--green-ink); overflow: visible; }
+.pr { width: 100%; height: auto; max-height: 275px; display: block; color: var(--ink); overflow: visible; }
 .step { transition: opacity .35s ease; }
 .step.off { opacity: 0; }
 .box { stroke-width: 1.4; }
-.box.clean { fill: rgba(127, 255, 181, .14); stroke: var(--green-fg); }
-.box.bad { fill: rgba(255, 58, 47, .12); stroke: var(--red-fg); }
-.box.patch { fill: rgba(247, 181, 0, .12); stroke: var(--red-amber); }
-.f-clean { fill: var(--green-fg); }
+.box.clean { fill: rgba(143, 227, 106, .14); stroke: var(--leaf); }
+.box.bad { fill: rgba(255, 111, 89, .12); stroke: var(--coral); }
+.box.patch { fill: rgba(255, 194, 75, .12); stroke: var(--sun); }
+.f-clean { fill: var(--leaf); }
 .wire { stroke: currentColor; stroke-width: 1.2; opacity: .45; }
 .txt { fill: currentColor; font-family: var(--font-body); font-size: 14px; font-weight: 300; }
 .mono { font-family: var(--font-mono); font-size: 15px; }
 .sub { fill: currentColor; font-family: var(--font-mono); font-size: 11.5px; opacity: .65; }
 .lbl-n { font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: .06em; }
 .lbl { fill: currentColor; font-family: var(--font-mono); font-size: 14px; }
-.t-clean { fill: var(--green-fg); }
-.t-bad { fill: var(--red-fg); }
-.t-patch { fill: var(--red-amber); }
+.t-clean { fill: var(--leaf); }
+.t-bad { fill: var(--coral); }
+.t-patch { fill: var(--sun); }
 .h { font-family: var(--font-mono); font-size: 12px; }
 .col { fill: currentColor; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .08em; opacity: .5; }
-.patch-wire { fill: none; stroke: var(--green-fg); stroke-width: 1.8; stroke-dasharray: 5 4; }
-.patch-lbl { fill: var(--green-fg); font-family: var(--font-mono); font-size: 12.5px; }
+.patch-wire { fill: none; stroke: var(--teal); stroke-width: 1.8; stroke-dasharray: 5 4; }
+.patch-lbl { fill: var(--teal); font-family: var(--font-mono); font-size: 12.5px; }
 .patch-lbl.dim { opacity: .65; font-size: 11px; }
 </style>
