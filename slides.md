@@ -259,14 +259,18 @@ class: theme-green layer-pink
 
 <Slashes :items="['7 pasos']" />
 
+<div class="grid grid-cols-2 gap-x-10">
 <div class="rows">
   <div class="r" v-click><span class="name">01 · targets</span><span class="what">proteínas chicas/medianas, post-cutoff · contacto de largo alcance presente con msa profundo, perdido con msa submuestreado</span></div>
   <div class="r" v-click><span class="name">02 · probe</span><span class="what">¿una dirección en Z_ij predice el contacto entre ejemplos? (nivel 1)</span></div>
   <div class="r" v-click><span class="name">03 · patch</span><span class="what">copiar la feature (i, j) ± vecindad profundo → superficial, o ablarla · barrer capa y recycle</span></div>
   <div class="r" v-click><span class="name">04 · medir</span><span class="what">distancia en coordenadas finales · daño off-target · confianza aparte</span></div>
+</div>
+<div class="rows">
   <div class="r" v-click><span class="name">05 · rescate</span><span class="what">restaurar la feature y confirmar que la geometría vuelve</span></div>
   <div class="r" v-click><span class="name">06 · vía</span><span class="what">path patching entre capas · triangle updates vs. atención · hasta el condicionamiento de difusión</span></div>
   <div class="r" v-click><span class="name">07 · generalizar</span><span class="what">familias held-out · opcional: otro predictor all-atom</span></div>
+</div>
 </div>
 
 ---
