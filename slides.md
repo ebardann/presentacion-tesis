@@ -23,7 +23,7 @@ class: theme-green
   title="AlphaFold3"
   :status="['Interpretabilidad', 'JAX', 'Patching']"
   :sub="['mecanismos causales', 'activation patching', 'geometría 3D']"
-  author="Emilio Bardan · tsesis · 2026"
+  author="Emilio Bardan · tesis · 2026"
 />
 
 <!--

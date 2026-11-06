@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import foldBg from '../assets/fold-bg.png'
+import coverBg from '../assets/cover-bg.png'
 
 defineProps<{ title: string; status?: string[]; sub?: string[]; author?: string }>()
 </script>
 
 <template>
   <div class="cover-wrap">
-    <img :src="foldBg" class="bg" alt="">
+    <img :src="coverBg" class="bg" alt="">
     <div class="grid-bg" />
     <div class="status-bar">
       <span class="dot-live" />
