@@ -54,7 +54,7 @@ fondo oscuro, títulos en minúscula (Inter ligera), etiquetas en IBM Plex Mono,
   Ejemplo: `class: theme-red layer-cool`.
 - **Clases de contenido** (en `styles/index.css`):
   `kv` (clave · valor), `rows` / `.r` / `.name` / `.what` (filas punteadas), `chips` / `chip`,
-  `box` / `box hot`, `note`, `ascii` (usar con `<pre>`), `big-quote`, `corner-glyph`.
+  `box` / `box hot`, `note`, `ascii` (usar con `<pre>`), `big-quote`.
 
 ## Estructura
 
@@ -62,10 +62,11 @@ fondo oscuro, títulos en minúscula (Inter ligera), etiquetas en IBM Plex Mono,
 |---|---|
 | `slides.md` | las slides |
 | `styles/index.css` | fuentes, paleta, temas, capas y clases de contenido |
-| `components/Cover.vue` | portada tipo terminal CRT (título con glow, barra de estado, glifos) |
+| `components/Cover.vue` | portada tipo terminal CRT (título con glow, barra de estado, imagen de fondo `assets/fold-bg.png`) |
 | `components/Slashes.vue` | subtítulo `a / b / c` — `<Slashes :items="['a','b']" />` |
 | `components/Ticker.vue` | barra con texto desplazándose; toma el color del tema de la slide actual |
 | `global-top.vue` / `global-bottom.vue` | barras superior e inferior (se ocultan en la portada). Editar aquí las frases y la velocidad (`:speed`, segundos por vuelta) |
+| `assets/fold-bg.png` | fondo de la portada: cadena desplegada → ubiquitina plegada (PDB 1UBQ, dominio público). Se regenera con `curl -sLO https://files.rcsb.org/download/1UBQ.pdb && python3 scripts/render_fold.py 1UBQ.pdb assets/fold-bg.png` |
 | `setup/mermaid.ts` | colores oscuros para los diagramas mermaid |
 
 Quedan del template de Slidev y no se usan: `components/Counter.vue`, `pages/imported-slides.md`,

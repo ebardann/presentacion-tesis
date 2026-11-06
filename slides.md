@@ -228,8 +228,6 @@ superposición: un canal ≠ un concepto.</p>
 class: theme-red layer-cool
 ---
 
-<div class="corner-glyph">仮説</div>
-
 # diseño principal
 
 <Slashes :items="['msa', 'contacto', 'coordenadas']" />

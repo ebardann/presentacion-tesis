@@ -100,8 +100,6 @@
               radial-gradient(ellipse at 15% 20%, rgba(247,181,0,.06), transparent 55%);
 }
 
-/* glifo decorativo en esquina */
-.corner-glyph { position: absolute; top: 2rem; right: 2.5rem; font-family: var(--font-jp); font-size: 1.4rem; color: var(--accent); opacity: .45; letter-spacing: .1em; z-index: 2; }
 
 /* mermaid sobre fondo oscuro */
 .slidev-layout .mermaid { display: flex; justify-content: center; }

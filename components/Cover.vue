@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import foldBg from '../assets/fold-bg.png'
+
 defineProps<{ title: string; status?: string[]; sub?: string[]; author?: string }>()
 </script>
 
 <template>
   <div class="cover-wrap">
+    <img :src="foldBg" class="bg" alt="">
     <div class="grid-bg" />
     <div class="status-bar">
       <span class="dot-live" />
@@ -22,9 +25,6 @@ defineProps<{ title: string; status?: string[]; sub?: string[]; author?: string 
       <div v-if="author" class="author">{{ author }}</div>
     </div>
 
-    <div class="glyph tl">因果</div>
-    <div class="glyph tr">構造</div>
-    <div class="glyph bl">折</div>
     <div class="scan" />
     <div class="vignette" />
   </div>
@@ -36,6 +36,7 @@ defineProps<{ title: string; status?: string[]; sub?: string[]; author?: string 
   background: radial-gradient(ellipse at 70% 30%, rgba(127,255,181,.08), transparent 55%),
               radial-gradient(ellipse at 20% 80%, rgba(255,46,195,.06), transparent 50%), #0b0f0d;
 }
+.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .7; z-index: 1; }
 .grid-bg {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background-image: linear-gradient(rgba(127,255,181,.08) 1px, transparent 1px),
@@ -59,10 +60,6 @@ defineProps<{ title: string; status?: string[]; sub?: string[]; author?: string 
 .sub { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 8; text-align: center; color: var(--green-ink); white-space: nowrap; }
 .sub :deep(.slashes) { font-size: 1.05rem; letter-spacing: .15em; margin: 0 0 .6rem; }
 .author { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .2em; opacity: .55; text-transform: lowercase; }
-.glyph { position: absolute; z-index: 7; font-family: var(--font-jp), var(--font-mono); color: var(--green-fg); opacity: .5; font-size: 1.3rem; letter-spacing: .1em; }
-.glyph.tl { top: 2.5rem; right: 2.5rem; }
-.glyph.tr { top: 16%; left: 3rem; font-size: 2.2rem; opacity: .18; }
-.glyph.bl { bottom: 3rem; left: 2.5rem; font-size: 1.1rem; opacity: .6; }
 .scan { position: absolute; inset: 0; z-index: 9; pointer-events: none; mix-blend-mode: multiply;
   background: repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0px, rgba(0,0,0,.22) 1px, transparent 1px, transparent 3px); }
 .vignette { position: absolute; inset: 0; z-index: 6; pointer-events: none;
