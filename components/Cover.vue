@@ -59,7 +59,7 @@ defineProps<{ title: string; status?: string[]; sub?: string[]; author?: string 
 .handle-big .cursor { margin-left: .15em; animation: blink 1s steps(1) infinite; }
 .sub { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 8; text-align: center; color: var(--ink); white-space: nowrap; }
 .sub :deep(.slashes) { font-size: 1.05rem; letter-spacing: .15em; margin: 0 0 .6rem; }
-.author { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .2em; opacity: .55; text-transform: lowercase; }
+.author { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .2em; opacity: .55; }
 .scan { position: absolute; inset: 0; z-index: 9; pointer-events: none; mix-blend-mode: multiply;
   background: repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0px, rgba(0,0,0,.22) 1px, transparent 1px, transparent 3px); }
 .vignette { position: absolute; inset: 0; z-index: 6; pointer-events: none;

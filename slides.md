@@ -21,9 +21,9 @@ class: theme-solar tone-sun
 
 <Cover
   title="AlphaFold3"
-  :status="['Interpretabilidad', 'JAX', 'Patching']"
-  :sub="['mecanismos causales', 'activation patching', 'geometría 3D']"
-  author="Emilio Bardan · tesis · 2026"
+  :status="['Interpretabilidad', 'JAX', 'Activation Patching']"
+  :sub="['mecanismos causales', 'características', 'geometría 3D']"
+  author="Emilio Bardán · tesis · 2026"
 />
 
 <!--
@@ -31,21 +31,71 @@ Basado en el field assessment del 14 oct 2026 (assessment.pdf).
 -->
 
 ---
+class: theme-solar tone-sun
+---
+
+# Interpretabilidad mecanística
+
+<Slashes :items="['features', 'circuitos', 'intervenciones']" />
+
+<p class="lead">Ingeniería inversa de una red entrenada: identificar <b>qué representa</b> internamente y <b>qué algoritmo implementa</b>, a partir de sus pesos y activaciones.</p>
+
+<div class="grid gap-10 mt-4" style="grid-template-columns:1.25fr 1fr">
+<div class="rows compact">
+  <div class="r"><span class="name">feature</span><span class="what">dirección en el espacio de activaciones que codifica una propiedad del input</span></div>
+  <div class="r"><span class="name">superposición</span><span class="what">la red guarda más features que neuronas → una neurona ≠ un concepto</span></div>
+  <div class="r"><span class="name">circuito</span><span class="what">subgrafo de features y pesos que implementa un cómputo concreto</span></div>
+  <div class="r"><span class="name">intervención</span><span class="what">patch · ablación · steering: correlación no basta, hay que mover el output</span></div>
+</div>
+<div>
+<MiCircuit />
+</div>
+</div>
+
+<p class="note refs mt-3">circuits (Olah 2020) · superposición (Elhage 2022) · causal tracing (Meng 2022) · path patching (Wang 2022) · SAEs (Bricken 2023)</p>
+
+---
+class: theme-solar tone-teal
+---
+
+# Dos enfoques
+
+<Slashes :items="['desde la red', 'desde las features']" />
+
+<TwoApproaches class="mt-2" />
+
+<p class="note mt-4">→ esta tesis: enfoque 01 · intervenir AF3 directamente; probes / SAEs sólo como candidatos</p>
+
+---
+class: theme-solar tone-leaf
+---
+
+# AlphaFold
+
+<Slashes :items="['secuencia', 'estructura', 'all-atom']" />
+
+<AlphaFoldIntro class="mt-2" />
+
+<p class="note mt-5">AlphaFold permite acelerar el diseño de fármacos, el estudio de enfermedades, el desarrollo de vacunas y enzimas, y la comprensión de la vida a nivel molecular.</p>
+
+---
 class: theme-solar tone-leaf
 ---
 
 
-# la tesis en una frase
+# La tesis en una frase
 
-<Slashes :items="['af3 congelado', 'una feature', 'coordenadas finales']" />
+<Slashes :items="['AF3 congelado', 'una feature', 'coordenadas finales']" />
 
 <p class="big-quote">
-usar <b>activation patching</b> sobre un <b>alphafold 3 congelado</b> para conectar
+Usar <b>activation patching</b> sobre un <b>AlphaFold 3 congelado</b> para conectar
 <b>una feature o vía interna</b> con un <b>cambio selectivo y reproducible</b>
-en las coordenadas 3d generadas por difusión.
+en las coordenadas 3D generadas por difusión.
 </p>
 
-<div class="kv mt-8">
+<ThesisStrip class="mt-5" />
+
+<div class="kv mt-4">
   <div><span class="k">selectivo</span> cambia la propiedad objetivo · el resto de la estructura se preserva</div>
   <div><span class="k">reproducible</span> se sostiene entre seeds, controles pareados y proteínas held-out</div>
 </div>
@@ -55,32 +105,16 @@ El assessment lo identifica como la oportunidad abierta más fuerte en MI de pre
 -->
 
 ---
-class: theme-solar tone-teal
----
-
-# decisiones
-
-<Slashes :items="['modelo', 'método', 'endpoint', 'claim']" />
-
-<div class="rows mt-4">
-  <div class="r"><span class="name">modelo</span><span class="what">alphafold 3 · jax/haiku · pesos congelados</span></div>
-  <div class="r"><span class="name">método</span><span class="what">activation patching + ablación / rescate</span></div>
-  <div class="r"><span class="name">endpoint</span><span class="what">coordenadas finales del módulo de difusión — no una lectura intermedia</span></div>
-  <div class="r"><span class="name">claim</span><span class="what">causal sobre el output → idealmente mecanístico (circuito / vía)</span></div>
-  <div class="r"><span class="name">entrenamiento</span><span class="what">ninguno · sólo forward passes</span></div>
-</div>
-
----
 class: theme-solar tone-coral
 ---
 
-# el gap
+# La brecha abordada
 
 <Slashes :items="['trabajo previo', 'qué falta']" />
 
 | trabajo | qué mostró | qué **no** mostró |
 |---|---|---|
-| **alphainterp** · feldman & skolnick 2026 · af3 | probes en single/pair en 4 ubicaciones; edits pca del pair final cambian la entropía del distograma | efecto en el **distogram head**, no en coordenadas de difusión |
+| **alphainterp** · feldman & skolnick 2026 · AF3 | dependencia del modelo en sus datos de MSA | características ni circuitos interpretables, ni su efecto en la geometría |
 | **pair scaling** · suzuki & amagasa 2026 · af3 + boltz-2 | escalar el pair rep amplía el sampling y recupera estados alternativos (86 proteínas) | perilla **global** — edita todas las features a la vez |
 | **pairsae** · migliorini et al. 2026 · boltz-2 | sae sobre pair comprimido; features alineadas con anotaciones | sin intervenciones · sin msas |
 | **saefold** · parsan et al. 2025 · esmfold | edit sae aumenta accesibilidad al solvente | ¿estado válido o daño / desorden? |
@@ -91,74 +125,113 @@ la contribución: explicar un efecto selectivo <b>y su transmisión</b>, con hel
 
 ---
 class: theme-solar tone-sun
+clicks: 1
+transition: view-transition
 ---
 
-# pipeline af3
+# Arquitectura de AF3
 
 <Slashes :items="['trunk', 'difusión', 'heads']" />
 
-```mermaid {scale: 0.85}
-flowchart LR
-  A[inputs<br/>seq · msa · templates · ligandos] --> B[embedder]
-  B --> C[msa module]
-  C --> D[pairformer ×48<br/>single H · pair Z<br/>+ recycling]
-  D --> E[diffusion module<br/>denoising iterativo]
-  E --> F[coordenadas X]
-  D --> G[distogram head]
-  E --> H[confidence<br/>plddt · pae · iptm]
-  style D fill:#221c08,stroke:#ffc24b,color:#f1ecd8
-  style E fill:#0a201e,stroke:#3fd9c7,color:#f1ecd8
-  style F fill:#12240c,stroke:#8fe36a,color:#8fe36a
-```
+<ArchFlow focus="msa" class="mt-8" />
 
-<p class="note mt-6">recycling y pasos de difusión = cómputo del modelo, no tiempo físico de plegamiento.
+<p class="note mt-10">recycling y pasos de difusión = cómputo del modelo, no tiempo físico de plegamiento.
 recycles / pasos / samples por seed se leen del config instalado — no se asumen.</p>
+
+---
+class: theme-solar tone-sun
+transition: view-transition
+---
+
+# Módulo MSA
+
+<div class="vt-chip" style="view-transition-name: msa-box">msa module · ×4 bloques</div>
+
+<Slashes :items="['evolución', 'covariación', 'pair Z']" />
+
+<MsaModule class="mm-big" />
+
+<div class="grid grid-cols-3 gap-5 mt-3">
+<div class="box"><h3>outer product mean</h3><p>msa → pair. la covariación entre las columnas i y j se escribe en Z_ij: aquí entra la señal evolutiva de contacto.</p></div>
+<div class="box"><h3>pair-weighted averaging</h3><p>pair → msa. Z pondera cómo se mezcla la información dentro de cada secuencia (reemplaza la row attention de AF2).</p></div>
+<div class="box"><h3>salida</h3><p>la msa se descarta al terminar el módulo: sólo Z continúa hacia el pairformer.</p></div>
+</div>
+
+<p class="note mt-3">→ tesis: aquí la profundidad del msa entra a Z · profundo = h_source, superficial = h_target</p>
+
+---
+class: theme-solar tone-sun
+clicks: 1
+transition: view-transition
+---
+
+# Arquitectura de AF3
+
+<Slashes :items="['trunk', 'difusión', 'heads']" />
+
+<ArchFlow focus="pairformer" :visited="['msa']" class="mt-8" />
+
+<p class="note mt-10">la msa ya dejó su señal en Z · ahora: cómo el pairformer refina H y Z durante 48 bloques.</p>
 
 ---
 class: theme-solar tone-leaf
 ---
 
-# representaciones
+# Pairformer
 
-<Slashes :items="['H', 'Z', 'X']" />
+<div class="vt-chip" style="view-transition-name: pf-box">pairformer · ×48 bloques</div>
 
-<div class="grid gap-10" style="grid-template-columns:1.3fr 1fr">
+<Slashes :items="['H', 'Z', 'triangle updates']" />
+
+<div class="grid gap-10" style="grid-template-columns:1.2fr 1fr">
 <div>
 
 <div class="rows">
   <div class="r"><span class="name">single H · N × 384</span><span class="what">vector contextual por token (residuo; átomos para ligandos)</span></div>
   <div class="r"><span class="name">pair Z · N × N × 128</span><span class="what">vector por par ordenado i→j</span></div>
-  <div class="r"><span class="name">coords X · A × 3</span><span class="what">una posición por átomo · A ≠ N</span></div>
+  <div class="r"><span class="name">coords X · A × 3</span><span class="what">una posición por átomo · A ≠ N · la genera la difusión</span></div>
 </div>
 
+<div class="tight mt-3">
 <v-clicks>
 
 - los vectores pair **no son distancias**; una distancia puede ser *decodificable*
-- triangle updates combinan i–k y k–j para actualizar i–j
+- triangle updates: Z_ij se actualiza con las aristas hacia un tercer residuo k
+- H se actualiza con atención sesgada por Z (pair bias)
 - intervenir = instrumentar haiku: **capturar → modificar → reanudar**
 
 </v-clicks>
+</div>
 
 </div>
-<pre class="ascii pt-4">
-      j →
-    ┌─────────────┐
-  i │ · · · · · · │
-  ↓ │ · · · · · · │
-    │ · · ■ · · · │ ← Z_ij ∈ ℝ¹²⁸
-    │ · · · · · · │
-    │ · · · · · · │
-    └─────────────┘
-     N × N × 128
-</pre>
+<div>
+<TriangleUpdates class="mt-2" />
 </div>
+</div>
+
+---
+class: theme-solar tone-teal
+---
+
+# Activation Patching
+
+<Slashes :items="['contrast pairs', 'patch', 'localizar']" />
+
+<div class="grid grid-cols-2 gap-5" style="margin-top:-.4rem">
+<div class="box"><h3>el problema</h3><p>si borramos un componente y deja de decir «baloncesto», ¿borramos el deporte, «esto es de deportes» o «hablo español»?</p></div>
+<div class="box hot"><h3>idea clave · contrast pairs</h3><p>prompts lo más parecidos posible, <b>salvo</b> la propiedad que nos importa → el patch aísla sólo esa diferencia.</p></div>
+</div>
+
+<ContrastPatching class="mt-3" />
+
+<p class="note refs mt-2">h' = h_B + m ⊙ (h_A − h_B) · m = token del nombre, capa ℓ · variantes: ablación · rescate · steering</p>
 
 ---
 class: theme-solar tone-teal
 clicks: 2
 ---
 
-# activation patching
+# Diseño principal
 
 <ContactGlyph />
 
@@ -175,123 +248,38 @@ $f(x) = g(h(x))$ &nbsp;·&nbsp; $h' = h_{\text{target}} + m \odot (h_{\text{sour
 <p class="note mt-2">mismo seed en las tres corridas · fuente, máscara y magnitud <b>son parte de la hipótesis</b></p>
 
 ---
-class: theme-solar tone-sun
----
-
-# features y evidencia
-
-<Slashes :items="['decodificable', 'causal', 'mecanístico']" />
-
-<div class="grid grid-cols-2 gap-10">
-<div>
-
-### candidatos · barato → rico
-
-<div class="chips mt-3">
-  <span class="chip">canales</span>
-  <span class="chip">pca</span>
-  <span class="chip">linear probe · Z_ij</span>
-  <span class="chip">sae</span>
-</div>
-
-<p class="note mt-5">comparar sae siempre contra baselines neurona / pca / probe.
-superposición: un canal ≠ un concepto.</p>
-
-</div>
-<div>
-
-### niveles
-
-<div class="rows">
-  <div class="r"><span class="name">1 · decodificable</span><span class="what">un probe lee la propiedad de h — no causal</span></div>
-  <div class="r"><span class="name">2 · causal</span><span class="what">intervenir h cambia el output como se predijo</span></div>
-  <div class="r"><span class="name">3 · mecanístico</span><span class="what">explica cómo se transforma y transmite la información</span></div>
-</div>
-
-</div>
-</div>
-
-<p class="note mt-6">un mecanismo describe <b>al predictor</b>, no la dinámica real del plegamiento.</p>
-
----
-class: theme-solar tone-coral
----
-
-# diseño principal
-
-<Slashes :items="['msa', 'contacto', 'coordenadas']" />
-
-<div class="kv mb-4">
-  <div><span class="k">pregunta</span> ¿cómo se vuelve la evidencia evolutiva una restricción de contacto?</div>
-  <div><span class="k">hipótesis</span> una feature localizada en Z_ij media el efecto del msa sobre (i, j) y llega hasta las coordenadas</div>
-</div>
-
-```mermaid {scale: 0.75}
-flowchart LR
-  D[msa profundo<br/>contacto presente] -->|h_source · Z_ij| P((patch))
-  S[msa superficial<br/>contacto perdido] -->|h_target| P
-  P --> R[reanudar pairformer<br/>+ difusión · seeds fijas]
-  R --> M[¿vuelve d i,j en<br/>coordenadas finales?]
-  style P fill:#2a110c,stroke:#ff6f59,color:#ff6f59
-  style M fill:#221c08,stroke:#ffc24b,color:#ffc24b
-```
-
-<p class="note mt-4">riesgo principal: la información está <b>distribuida</b> — no existe una feature pequeña y localizada.</p>
-
----
 class: theme-solar tone-leaf
 ---
 
-# protocolo
+# Protocolo y controles
 
-<Slashes :items="['7 pasos']" />
+<Slashes :items="['de decodificable a mecanístico', 'controles']" />
 
-<div class="grid grid-cols-2 gap-x-10">
-<div class="rows">
-  <div class="r" v-click><span class="name">01 · targets</span><span class="what">proteínas chicas/medianas, post-cutoff · contacto de largo alcance presente con msa profundo, perdido con msa submuestreado</span></div>
-  <div class="r" v-click><span class="name">02 · probe</span><span class="what">¿una dirección en Z_ij predice el contacto entre ejemplos? (nivel 1)</span></div>
-  <div class="r" v-click><span class="name">03 · patch</span><span class="what">copiar la feature (i, j) ± vecindad profundo → superficial, o ablarla · barrer capa y recycle</span></div>
-  <div class="r" v-click><span class="name">04 · medir</span><span class="what">distancia en coordenadas finales · daño off-target · confianza aparte</span></div>
-</div>
-<div class="rows">
-  <div class="r" v-click><span class="name">05 · rescate</span><span class="what">restaurar la feature y confirmar que la geometría vuelve</span></div>
-  <div class="r" v-click><span class="name">06 · vía</span><span class="what">path patching entre capas · triangle updates vs. atención · hasta el condicionamiento de difusión</span></div>
-  <div class="r" v-click><span class="name">07 · generalizar</span><span class="what">familias held-out · opcional: otro predictor all-atom</span></div>
-</div>
+<div class="steps mt-2" style="grid-template-columns:repeat(4, 1fr); gap:1.6rem">
+  <div class="st"><span class="n">1</span><span class="t">probe</span><span class="d">antes de intervenir: ¿una dirección en Z_ij predice el contacto?</span><span class="lv">decodificable</span></div>
+  <div class="st seen"><span class="n">2</span><span class="t">patch</span><span class="d">el diseño principal</span><span class="lv">causal</span></div>
+  <div class="st"><span class="n">3</span><span class="t">vía</span><span class="d">path patching: cómo viaja la señal hasta la difusión</span><span class="lv">mecanístico</span></div>
+  <div class="st"><span class="n">4</span><span class="t">generalizar</span><span class="d">familias de proteínas held-out</span><span class="lv">reproducible</span></div>
 </div>
 
----
-class: theme-solar tone-sun
----
-
-# controles
-
-<Slashes :items="['no negociables']" />
-
-<div class="grid grid-cols-2 gap-x-10">
-<div class="rows">
-  <div class="r"><span class="name">no-change patch</span><span class="what">h' = h reproduce el baseline bit a bit antes de interpretar nada</span></div>
-  <div class="r"><span class="name">edits aleatorios</span><span class="what">dirección / máscara random de igual norma → descarta daño genérico</span></div>
-  <div class="r"><span class="name">rescate</span><span class="what">reversibilidad del efecto</span></div>
-  <div class="r"><span class="name">pair-scaling global</span><span class="what">baseline a magnitud y budget de samples equivalentes</span></div>
+<div class="grid grid-cols-2 gap-x-12 mt-10">
+<div class="rows inline-rows">
+  <div class="r"><span class="name">no-change patch</span><span class="what">h' = h debe dar el mismo output bit a bit</span></div>
+  <div class="r"><span class="name">edits random</span><span class="what">igual norma → descarta daño genérico</span></div>
 </div>
-<div class="rows">
-  <div class="r"><span class="name">seeds y sampling</span><span class="what">fijar inputs, seeds, nº samples · top-1 vs. best-of-n</span></div>
-  <div class="r"><span class="name">off-target</span><span class="what">regiones no relacionadas intactas · confianza ≠ geometría</span></div>
-  <div class="r"><span class="name">sae recon-only</span><span class="what">insertar sólo la reconstrucción ya puede cambiar outputs</span></div>
-  <div class="r"><span class="name">leakage</span><span class="what">fecha posterior ≠ sin homólogos en training</span></div>
+<div class="rows inline-rows">
+  <div class="r"><span class="name">pair-scaling</span><span class="what">comparar contra la perilla global</span></div>
+  <div class="r"><span class="name">leakage</span><span class="what">post-cutoff ≠ sin homólogos en training</span></div>
 </div>
 </div>
 
-<div class="box hot mt-6 text-center">
-<span class="note" style="opacity:1">éxito → la explicación predice cuándo funciona, cuándo falla y qué outputs quedan intactos</span>
-</div>
+<p class="note mt-10" style="opacity:.9">Éxito → la explicación predice cuándo funciona, cuándo falla y qué queda intacto</p>
 
 ---
 class: theme-solar tone-teal
 ---
 
-# endpoints
+# Endpoints
 
 <Slashes :items="['geometría', 'distograma', 'confianza']" />
 
@@ -304,59 +292,32 @@ class: theme-solar tone-teal
 | confianza | plddt · pae · iptm — confianza, **no** precisión |
 | ligandos | posebusters · ligand rmsd · lddt-pli |
 
-<p class="note mt-4">diferencias chicas sin barras de error no son resultados.</p>
-
----
-class: theme-solar tone-leaf
----
-
-# cómputo
-
-<Slashes :items="['gpu', 'storage', 'runtime']" />
-
-<div class="grid grid-cols-2 gap-10">
-<div class="kv">
-  <div><span class="k">gpu</span> 1× a100/h100 80 gb</div>
-  <div><span class="k">host</span> 128 gb ram · 16–32 cores</div>
-  <div><span class="k">scratch</span> 1–2 tb ssd</div>
-  <div><span class="k">bases af3</span> ~1 tb → msas cacheados</div>
-  <div><span class="k">runtime</span> ~62 s · 1.024 tokens</div>
-  <div><span class="k">piloto</span> 50 × 10 × 3 ≈ 26 gpu-h</div>
-</div>
-<div>
-<pre class="ascii">
-pair tensor  N=512 · 128ch · fp16
-  ├─ 1 tensor        64 MiB
-  ├─ × 48 capas       3 GiB / recycle
-  └─ × 10 recycles   30 GiB / proteína
-                     ∝ N²
-</pre>
-<p class="note mt-4">capturar sólo ubicaciones seleccionadas · muestrear pares · streamear.
-reutilizar cómputo upstream al parchear tarde.</p>
-</div>
-</div>
+<p class="note mt-4">Diferencias chicas sin barras de error no son resultados.</p>
 
 ---
 class: theme-solar tone-teal
 ---
 
-# estado
+# Estado actual
 
-<Slashes :items="['hecho', 'siguiente']" />
+<Slashes :items="['hecho', 'en espera', 'siguiente']" />
 
 <div class="grid gap-10" style="grid-template-columns:1fr 1.6fr">
 <div class="rows">
-  <div class="r"><span class="name">✓ modelo</span><span class="what">alphafold 3</span></div>
+  <div class="r"><span class="name">✓ modelo</span><span class="what">AlphaFold 3</span></div>
   <div class="r"><span class="name">✓ método</span><span class="what">activation patching</span></div>
   <div class="r"><span class="name">✓ diseño</span><span class="what">marco y protocolo definidos</span></div>
+  <div class="r"><span class="name">✓ AF3</span><span class="what">código y pesos disponibles</span></div>
 </div>
-<div class="rows">
-  <div class="r"><span class="name">01 · pesos</span><span class="what">obtener af3 + revisar términos no comerciales</span></div>
-  <div class="r"><span class="name">02 · baseline</span><span class="what">instalar af3 y correr una predicción</span></div>
-  <div class="r"><span class="name">03 · hooks</span><span class="what">capture / patch / resume → pasar el no-change test</span></div>
-  <div class="r"><span class="name">04 · piloto</span><span class="what">proteínas con contactos dependientes del msa</span></div>
-  <div class="r"><span class="name">05 · perfil</span><span class="what">memoria y runtime</span></div>
-  <div class="r"><span class="name">06 · refinar</span><span class="what">la hipótesis</span></div>
+<div>
+<div class="box hot mb-4" style="padding:.6rem 1rem"><span class="note" style="opacity:1">⏳ en espera · acceso SSH a la GPU para instalar y comenzar</span></div>
+<div class="rows inline-rows">
+  <div class="r"><span class="name">01 · baseline</span><span class="what">instalar AF3 en el servidor y correr una predicción</span></div>
+  <div class="r"><span class="name">02 · hooks</span><span class="what">capture / patch / resume → pasar el no-change test</span></div>
+  <div class="r"><span class="name">03 · piloto</span><span class="what">proteínas con contactos dependientes del msa</span></div>
+  <div class="r"><span class="name">04 · perfil</span><span class="what">memoria y runtime</span></div>
+  <div class="r"><span class="name">05 · refinar</span><span class="what">la hipótesis</span></div>
+</div>
 </div>
 </div>
 
@@ -367,10 +328,10 @@ class: theme-solar tone-teal text-center
 
 <GlitchBg image="closing-bg.png" :opacity="0.75" :dim="0.6" />
 
-# <span class="glitch" data-text="gracias">gracias</span>
+# <span class="glitch" data-text="gracias">Gracias</span>
 
 <p class="big-quote mt-6" style="opacity:.85">
-"af3 usa la feature x para acercar i y j"<br/>
+"AF3 usa la feature x para acercar i y j"<br/>
 <span style="opacity:.5">≠</span><br/>
 "así se pliega la proteína"
 </p>

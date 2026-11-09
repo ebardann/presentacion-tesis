@@ -27,7 +27,7 @@
 }
 .slidev-layout > * { position: relative; z-index: 1; }
 .slidev-layout h1, .slidev-layout h2, .slidev-layout h3 {
-  font-family: var(--font-body); font-weight: 300; letter-spacing: -.02em; text-transform: lowercase;
+  font-family: var(--font-body); font-weight: 300; letter-spacing: -.02em;
 }
 .slidev-layout h1 { font-size: 3.2rem; line-height: 1.05; margin: 0 0 1.1rem; color: var(--accent); }
 .slidev-layout h2 { font-size: 1.9rem; opacity: .82; }
@@ -43,7 +43,7 @@
 /* tablas: mono, filas punteadas */
 .slidev-layout table { width: 100%; border-collapse: collapse; font-size: .85rem; }
 .slidev-layout th {
-  font-family: var(--font-mono); font-weight: 500; text-transform: lowercase; letter-spacing: .06em;
+  font-family: var(--font-mono); font-weight: 500; letter-spacing: .06em;
   color: var(--accent); text-align: left; border-bottom: 1px solid var(--accent-soft); padding: .45rem .6rem;
 }
 .slidev-layout td { border-bottom: 1px dashed var(--accent-soft); padding: .45rem .6rem; font-weight: 300; vertical-align: top; }
@@ -67,7 +67,7 @@
 .box.hot { border-color: var(--accent); box-shadow: 0 0 25px var(--accent-soft); }
 .slidev-layout .note, .note { font-family: var(--font-mono); font-size: .85rem; opacity: .7; letter-spacing: .02em; }
 .slidev-layout pre.ascii, .ascii { margin: 0; background: transparent; font-family: var(--font-mono); font-size: .85rem; line-height: 1.25; white-space: pre; opacity: .85; color: var(--accent); }
-.big-quote { font-size: 1.7rem; font-weight: 200; line-height: 1.45; }
+.slidev-layout .big-quote, .big-quote { font-size: 1.45rem; font-weight: 200; line-height: 1.45; margin: 0; }
 
 /* ---------- tema único: solar/cyber punk ---------- */
 .slidev-layout.theme-solar h1 { text-shadow: 0 0 22px color-mix(in srgb, var(--accent) 35%, transparent); }
@@ -121,3 +121,36 @@
 /* GlitchBg dentro del layout center: el fondo cubre toda la slide */
 .slidev-layout.center > :has(> .glitch-bg) { position: static; }
 .slidev-layout.center > :has(> .glitch-bg) > :not(.glitch-bg) { position: relative; z-index: 1; }
+
+/* ---------- transición arquitectura → módulo (view-transition) ---------- */
+.slidev-layout .vt-chip {
+  position: absolute !important; top: 3.6rem; right: 3rem; z-index: 2;
+  font-family: var(--font-mono); font-size: .85rem; letter-spacing: .04em; color: var(--sun);
+  padding: .45rem .9rem; border: 1px solid var(--sun); border-radius: 4px; background: #221c08;
+  box-shadow: 0 0 24px rgba(255, 194, 75, .3);
+}
+::view-transition-group(msa-box), ::view-transition-group(pf-box) { animation-duration: .6s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
+.slidev-layout .box h3 { margin: 0; font-size: .95rem; }
+.slidev-layout .box p { font-size: .82rem; line-height: 1.45; margin: .35rem 0 0; opacity: .85; }
+.mm-big { max-height: 165px !important; }
+.slidev-layout .grid > .box { padding: .6rem .9rem; }
+.slidev-layout .tight li { font-size: .9rem; line-height: 1.4; margin: .15rem 0; }
+.slidev-layout .tight ul { margin: 0; }
+.slidev-layout .lead { font-size: 1.2rem; font-weight: 300; line-height: 1.5; margin: 0; }
+.rows.compact { gap: .15rem; }
+.rows.compact .r { padding: .22rem 0; }
+.slidev-layout .note.refs { font-size: .68rem; }
+
+/* protocolo: pasos en línea */
+.steps { display: grid; grid-template-columns: repeat(7, 1fr); gap: .6rem; position: relative; margin-top: -.2rem; }
+.steps::before { content: ""; position: absolute; left: .4rem; right: .4rem; top: .62rem; border-top: 1px dashed var(--accent-soft); }
+.steps .st { display: flex; flex-direction: column; gap: .2rem; position: relative; }
+.steps .n { font-family: var(--font-mono); font-size: .72rem; color: var(--bg); background: var(--accent); border-radius: 999px; width: 1.3rem; height: 1.3rem; display: grid; place-items: center; font-weight: 600; }
+.steps .t { font-family: var(--font-mono); font-size: .88rem; color: var(--accent); margin-top: .2rem; }
+.steps .d { font-size: .7rem; line-height: 1.35; opacity: .75; font-weight: 300; }
+.inline-rows { gap: 0; }
+.inline-rows .r { flex-direction: row; align-items: baseline; gap: .8rem; padding: .28rem 0; }
+.inline-rows .name { flex: 0 0 8.2rem; font-size: .82rem; }
+.inline-rows .what { font-size: .74rem; }
+.steps .st.seen { opacity: .4; }
+.steps .lv { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .08em; color: var(--accent-2); margin-top: .15rem; }
