@@ -34,13 +34,30 @@ Basado en el field assessment del 14 oct 2026 (assessment.pdf).
 class: theme-solar tone-sun mi-slide
 ---
 
-# Interpretabilidad mecanística
+# Interpretabilidad
 
 <p class="lead lead-strong">Entrenamos a los modelos para que aprendan, pero <b>no decidimos qué aprenden</b>.</p>
 
-<MiConcepts class="mi-push" />
+<BehavMech class="mi-push" />
 
-<p class="note refs mt-4">circuits (Olah 2020) · superposición (Elhage 2022) · causal tracing (Meng 2022) · path patching (Wang 2022) · SAEs (Bricken 2023)</p>
+<p class="note refs">Barez et al. · Understanding AI from the Inside · §4.1</p>
+
+---
+class: theme-solar tone-coral gap-slide
+---
+
+# La brecha de interpretabilidad
+
+<InterpGap class="gap-center" />
+
+<p class="note refs">Barez et al. · Understanding AI from the Inside · §1</p>
+
+<!--
+Interpretability gap: la disparidad entre lo que los modelos hacen (capacidades y comportamientos)
+y lo que entendemos de cómo lo hacen (sus mecanismos internos). Al escalar, la brecha tiende a crecer:
+razonamiento que no podemos rastrear, comportamientos engañosos sin detectar, garantías de seguridad
+construidas sobre una comprensión incompleta.
+-->
 
 ---
 class: theme-solar tone-teal
@@ -53,6 +70,38 @@ class: theme-solar tone-teal
 <TwoApproaches class="mt-2" />
 
 <p class="note mt-4">→ esta tesis: enfoque 01 · intervenir AF3 directamente; probes / SAEs sólo como candidatos</p>
+
+---
+class: theme-solar tone-sun jump-slide
+---
+
+# De LLMs a proteínas
+
+<LlmToProtein class="jump-center" />
+
+<!--
+La interpretabilidad mecanística nació en modelos de lenguaje (probes, patching, SAEs, circuitos).
+El mismo instrumental se está llevando a modelos de proteínas: ESM-2 (InterPLM), ESMFold (SAEFold),
+Boltz-2 (PairSAE) y AF3 (AlphaInterp). Diferencia clave: la representación incluye un pair L×L y la
+salida no es una palabra sino geometría 3D.
+-->
+
+---
+class: theme-solar tone-teal rs-slide
+---
+
+# Residual stream
+
+<ResidualStream class="rs-center" />
+
+<!--
+El residual stream es el "bus" de la red: cada bloque lee de él y le suma su salida.
+En un LLM, attention mueve información entre tokens y el MLP la transforma en el lugar.
+En AF3 hay dos streams: H (single, N×384) y Z (pair, N×N×128); triangle updates escriben en Z
+y la atención sobre H está sesgada por Z (pair bias). ×48 bloques.
+Activation patching = capturar el stream en un punto, modificarlo y reanudar el resto de la red.
+(QK/OV circuits —Elhage 2021— son la descomposición fina de las heads en LLMs; no se usan en esta tesis.)
+-->
 
 ---
 class: theme-solar tone-leaf af-slide
