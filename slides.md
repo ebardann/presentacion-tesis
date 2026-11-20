@@ -32,6 +32,7 @@ Basado en el field assessment del 14 oct 2026 (assessment.pdf).
 
 ---
 class: theme-solar tone-sun mi-slide
+transition: view-transition
 ---
 
 # Interpretabilidad
@@ -41,6 +42,23 @@ class: theme-solar tone-sun mi-slide
 <BehavMech class="mi-push" />
 
 <p class="note refs">Barez et al. · Understanding AI from the Inside · §4.1</p>
+
+---
+class: theme-solar tone-leaf qdc-slide
+transition: view-transition
+---
+
+# Técnicas por pregunta
+
+<QueDondeComo class="qdc-center" />
+
+<!--
+Fuente: Barez et al. · Understanding AI from the Inside · §2–3.
+Evaluación conductual responde QUÉ hace el modelo (salidas ante inputs).
+Atribución y sondeo responden DÓNDE está la información (qué inputs importan, qué es decodificable en una capa) — correlacional.
+Análisis mecanístico responde CÓMO se computa: requiere mirar los internos y hacer afirmaciones causales (ablación, patching, steering).
+Un probe se vuelve mecanístico cuando la dirección encontrada se usa para intervenir.
+-->
 
 ---
 class: theme-solar tone-coral gap-slide
@@ -60,16 +78,47 @@ construidas sobre una comprensión incompleta.
 -->
 
 ---
-class: theme-solar tone-teal
+class: theme-solar tone-teal two-slide
 ---
 
 # Dos enfoques
 
 <Slashes :items="['desde la red', 'desde las features']" />
 
-<TwoApproaches class="mt-2" />
+<TwoApproaches class="two-center" />
 
-<p class="note mt-4">→ esta tesis: enfoque 01 · intervenir AF3 directamente; probes / SAEs sólo como candidatos</p>
+
+---
+class: theme-solar tone-leaf
+---
+
+# Activation Patching
+
+<Slashes :items="['contrast pairs', 'patch', 'localizar']" />
+
+<div style="margin-top:-.4rem">
+<div class="box hot"><h3>idea clave · contrast pairs</h3><p>prompts lo más parecidos posible, <b>salvo</b> la propiedad que nos importa → el patch aísla sólo esa diferencia.</p></div>
+</div>
+
+<ContrastPatching class="mt-3" />
+
+<p class="note refs mt-2">h' = h_B + m ⊙ (h_A − h_B) · m = token del nombre, capa ℓ · variantes: ablación · rescate · steering</p>
+
+---
+class: theme-solar tone-teal rs-slide
+---
+
+# Residual stream
+
+<ResidualStream only="llm" class="rs-center" />
+
+<!--
+El residual stream es el "bus" de la red: cada bloque lee de él y le suma su salida.
+En un LLM, attention mueve información entre tokens y el MLP la transforma en el lugar.
+(La versión AF3 —H y Z como streams— se ve después del Pairformer, en "Dónde se interviene".)
+Activation patching = capturar el stream en un punto, modificarlo y reanudar el resto de la red.
+(QK/OV circuits —Elhage 2021— son la descomposición fina de las heads en LLMs; no se usan en esta tesis.)
+-->
 
 ---
 class: theme-solar tone-sun jump-slide
@@ -87,23 +136,6 @@ salida no es una palabra sino geometría 3D.
 -->
 
 ---
-class: theme-solar tone-teal rs-slide
----
-
-# Residual stream
-
-<ResidualStream class="rs-center" />
-
-<!--
-El residual stream es el "bus" de la red: cada bloque lee de él y le suma su salida.
-En un LLM, attention mueve información entre tokens y el MLP la transforma en el lugar.
-En AF3 hay dos streams: H (single, N×384) y Z (pair, N×N×128); triangle updates escriben en Z
-y la atención sobre H está sesgada por Z (pair bias). ×48 bloques.
-Activation patching = capturar el stream en un punto, modificarlo y reanudar el resto de la red.
-(QK/OV circuits —Elhage 2021— son la descomposición fina de las heads en LLMs; no se usan en esta tesis.)
--->
-
----
 class: theme-solar tone-leaf af-slide
 ---
 
@@ -114,51 +146,6 @@ class: theme-solar tone-leaf af-slide
 <AlphaFoldIntro class="af-center" />
 
 <p class="note">AlphaFold permite acelerar el diseño de fármacos, el estudio de enfermedades, el desarrollo de vacunas y enzimas, y la comprensión de la vida a nivel molecular.</p>
-
----
-class: theme-solar tone-leaf
----
-
-
-# Tesis
-
-<Slashes :items="['AF3 congelado', 'una feature', 'coordenadas finales']" />
-
-<p class="big-quote">
-Usar <b>activation patching</b> sobre un <b>AlphaFold 3 congelado</b> para conectar
-<b>una feature o vía interna</b> con un <b>cambio selectivo y reproducible</b>
-en las coordenadas 3D generadas por difusión.
-</p>
-
-<ThesisStrip class="mt-5" />
-
-<div class="kv mt-4">
-  <div><span class="k">selectivo</span> cambia la propiedad objetivo · el resto de la estructura se preserva</div>
-  <div><span class="k">reproducible</span> se sostiene entre seeds, controles pareados y proteínas held-out</div>
-</div>
-
-<!--
-El assessment lo identifica como la oportunidad abierta más fuerte en MI de predictores de estructura (p.5).
--->
-
----
-class: theme-solar tone-coral
----
-
-# La brecha abordada
-
-<Slashes :items="['trabajo previo', 'qué falta']" />
-
-| trabajo | qué mostró | qué **no** mostró |
-|---|---|---|
-| **alphainterp** · feldman & skolnick 2026 · AF3 | dependencia del modelo en sus datos de MSA | características ni circuitos interpretables, ni su efecto en la geometría |
-| **pair scaling** · suzuki & amagasa 2026 · af3 + boltz-2 | escalar el pair rep amplía el sampling y recupera estados alternativos (86 proteínas) | perilla **global** — edita todas las features a la vez |
-| **pairsae** · migliorini et al. 2026 · boltz-2 | sae sobre pair comprimido; features alineadas con anotaciones | sin intervenciones · sin msas |
-| **saefold** · parsan et al. 2025 · esmfold | edit sae aumenta accesibilidad al solvente | ¿estado válido o daño / desorden? |
-| interplm · adams et al. · esm-2 | features interpretables en plms | sobre el lenguaje, no el plegador |
-
-<p class="note mt-4">→ el descubrimiento de features está más maduro que la explicación a nivel circuito.
-la contribución: explicar un efecto selectivo <b>y su transmisión</b>, con held-out y controles.</p>
 
 ---
 class: theme-solar tone-sun
@@ -220,48 +207,81 @@ class: theme-solar tone-leaf
 
 <Slashes :items="['H', 'Z', 'triangle updates']" />
 
-<div class="grid gap-10" style="grid-template-columns:1.2fr 1fr">
-<div>
-
-<div class="rows">
-  <div class="r"><span class="name">single H · N × 384</span><span class="what">vector contextual por token (residuo; átomos para ligandos)</span></div>
-  <div class="r"><span class="name">pair Z · N × N × 128</span><span class="what">vector por par ordenado i→j</span></div>
-  <div class="r"><span class="name">coords X · A × 3</span><span class="what">una posición por átomo · A ≠ N · la genera la difusión</span></div>
+<div class="grid gap-12 items-center pf-grid" style="grid-template-columns:1fr 1fr">
+<PairformerBlock />
+<TriangleUpdates />
 </div>
 
-<div class="tight mt-3">
-<v-clicks>
+<p class="note pf-key">Z se refina a sí mismo y guía la atención sobre H</p>
 
-- los vectores pair **no son distancias**; una distancia puede ser *decodificable*
-- triangle updates: Z_ij se actualiza con las aristas hacia un tercer residuo k
-- H se actualiza con atención sesgada por Z (pair bias)
-- intervenir = instrumentar haiku: **capturar → modificar → reanudar**
-
-</v-clicks>
-</div>
-
-</div>
-<div>
-<TriangleUpdates class="mt-2" />
-</div>
-</div>
+<!--
+single H · N × 384: vector contextual por token (residuo; átomos para ligandos).
+pair Z · N × N × 128: vector por par ordenado i→j. Los vectores pair no son distancias; una distancia puede ser decodificable.
+Triangle updates: Z_ij se actualiza con las aristas hacia un tercer residuo k (outgoing / incoming), + triangle attention.
+H se actualiza con atención sesgada por Z (pair bias).
+coords X · A × 3: una posición por átomo, la genera la difusión (no el Pairformer).
+Intervenir = instrumentar Haiku: capturar → modificar → reanudar.
+-->
 
 ---
-class: theme-solar tone-teal
+class: theme-solar tone-teal rs-slide
 ---
 
-# Activation Patching
+# Dónde se interviene
 
-<Slashes :items="['contrast pairs', 'patch', 'localizar']" />
+<ResidualStream only="af3" class="rs-center" />
 
-<div class="grid grid-cols-2 gap-5" style="margin-top:-.4rem">
-<div class="box"><h3>el problema</h3><p>si borramos un componente y deja de decir «baloncesto», ¿borramos el deporte, «esto es de deportes» o «hablo español»?</p></div>
-<div class="box hot"><h3>idea clave · contrast pairs</h3><p>prompts lo más parecidos posible, <b>salvo</b> la propiedad que nos importa → el patch aísla sólo esa diferencia.</p></div>
+<!--
+Mismo concepto que en LLMs: en AF3 el residual stream son H (single, N×384) y Z (pair, N×N×128).
+Triangle updates escriben en Z; la atención sobre H está sesgada por Z (pair bias). ×48 bloques.
+El patch se aplica en Z (pares i,j / canales / bloque ℓ / recycle) y todo lo que sigue —el resto del
+Pairformer y la difusión— corre igual, con seeds fijos.
+-->
+
+---
+class: theme-solar tone-coral pw-slide
+---
+
+# Trabajo previo
+
+<PriorWork class="pw-center" />
+
+<p class="note pw-key">Nadie conecta una feature <b>localizada</b> con las <b>coordenadas 3D</b> finales.</p>
+
+<!--
+InterPLM · Adams et al. · ESM-2: features interpretables en PLMs; sobre el lenguaje, no el plegador.
+PairSAE · Migliorini et al. 2026 · Boltz-2: SAE sobre pair comprimido, features alineadas con anotaciones; sin intervenciones, sin MSAs.
+SAEFold · Parsan et al. 2025 · ESMFold: edit SAE aumenta accesibilidad al solvente; ¿estado válido o daño / desorden? (por eso coords = parcial).
+AlphaInterp · Feldman & Skolnick 2026 · AF3: probes en H y Z; edits PCA del pair final cambian la entropía del distograma, no las coordenadas de difusión.
+Pair scaling · Suzuki & Amagasa 2026 · AF3 + Boltz-2: escalar Z amplía el sampling y recupera estados alternativos (86 proteínas); perilla global, edita todas las features a la vez.
+El descubrimiento de features está más maduro que la explicación a nivel circuito. Contribución: explicar un efecto selectivo y su transmisión, con held-out y controles.
+-->
+
+---
+class: theme-solar tone-leaf
+---
+
+
+# Tesis
+
+<Slashes :items="['AF3 congelado', 'una feature', 'coordenadas finales']" />
+
+<p class="big-quote">
+Usar <b>activation patching</b> sobre un <b>AlphaFold 3 congelado</b> para conectar
+<b>una feature o vía interna</b> con un <b>cambio selectivo y reproducible</b>
+en las coordenadas 3D generadas por difusión.
+</p>
+
+<ThesisStrip class="mt-5" />
+
+<div class="kv mt-4">
+  <div><span class="k">selectivo</span> cambia la propiedad objetivo · el resto de la estructura se preserva</div>
+  <div><span class="k">reproducible</span> se sostiene entre seeds, controles pareados y proteínas held-out</div>
 </div>
 
-<ContrastPatching class="mt-3" />
-
-<p class="note refs mt-2">h' = h_B + m ⊙ (h_A − h_B) · m = token del nombre, capa ℓ · variantes: ablación · rescate · steering</p>
+<!--
+El assessment lo identifica como la oportunidad abierta más fuerte en MI de predictores de estructura (p.5).
+-->
 
 ---
 class: theme-solar tone-teal
@@ -332,7 +352,7 @@ class: theme-solar tone-teal
 <p class="note mt-4">Diferencias chicas sin barras de error no son resultados.</p>
 
 ---
-class: theme-solar tone-teal
+class: theme-solar tone-sun
 ---
 
 # Estado actual

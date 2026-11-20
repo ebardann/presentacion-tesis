@@ -176,3 +176,26 @@
 /* slide 6 · residual stream */
 .slidev-layout.rs-slide { display: flex; flex-direction: column; }
 .slidev-layout.rs-slide .rs-center { margin: auto 0; }
+
+/* pairformer: visual a pantalla */
+.slidev-layout .pf-grid { margin-top: 1.6rem; }
+.slidev-layout .note.pf-key { text-align: center; margin-top: 2rem; font-size: .95rem; opacity: .85; }
+
+/* dos enfoques: paneles centrados en el alto disponible */
+.slidev-layout.two-slide { display: flex; flex-direction: column; }
+.slidev-layout.two-slide .two-center { margin: auto 0; }
+
+/* técnicas por pregunta */
+.slidev-layout.qdc-slide { display: flex; flex-direction: column; }
+.slidev-layout.qdc-slide .qdc-center { margin: auto 0; }
+
+/* morph interpretabilidad → técnicas por pregunta: sin deformar los dibujos */
+::view-transition-group(vt-beh), ::view-transition-group(vt-mech),
+::view-transition-group(vt-beh-t), ::view-transition-group(vt-mech-t) { animation-duration: .7s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
+::view-transition-old(vt-beh), ::view-transition-new(vt-beh),
+::view-transition-old(vt-mech), ::view-transition-new(vt-mech) { height: 100%; width: 100%; object-fit: contain; }
+
+/* trabajo previo: matriz centrada */
+.slidev-layout.pw-slide { display: flex; flex-direction: column; }
+.slidev-layout.pw-slide .pw-center { margin: -.6rem 0 0; }
+.slidev-layout .note.pw-key { text-align: center; margin: 1rem 0 auto; font-size: 1rem; opacity: .9; }

@@ -3,6 +3,9 @@
 // Izquierda: un token de un LLM (attn trae info de otro token, MLP transforma en el lugar).
 // Derecha: Pairformer de AF3, con dos streams (H single, Z pair).
 // El punto dorado marca dónde se captura → modifica → reanuda (activation patching).
+// prop `only`: 'llm' | 'af3' muestra sólo una mitad (con el texto al costado).
+const props = defineProps<{ only?: 'llm' | 'af3' }>()
+const vb = props.only === 'llm' ? '20 0 400 300' : props.only === 'af3' ? '490 0 460 300' : '0 0 960 300'
 
 // lectura (stream → bloque) y escritura (bloque → ⊕ en el stream)
 function rw(sx: number, bx: number, y: number) {
@@ -31,8 +34,8 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
 </script>
 
 <template>
-  <div class="rs">
-    <svg viewBox="0 0 960 300" class="fig" role="img" aria-label="residual stream: cada bloque lee y suma al stream; en AF3 los streams son H y Z; el patch reemplaza el stream en un punto">
+  <div class="rs" :class="only ? `solo ${only}` : ''">
+    <svg :viewBox="vb" class="fig" role="img" aria-label="residual stream: cada bloque lee y suma al stream; en AF3 los streams son H y Z; el patch reemplaza el stream en un punto">
       <defs>
         <marker id="rs-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)" opacity=".55" /></marker>
         <marker id="rs-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)" /></marker>
@@ -40,6 +43,7 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
       </defs>
 
       <!-- ===== LLM ===== -->
+      <g v-if="only !== 'af3'">
       <text x="40" y="12" class="hd">LLM · un token</text>
       <!-- stream vecino (otro token) -->
       <line :x1="NB" y1="282" :x2="NB" y2="62" class="stream dim" />
@@ -66,10 +70,13 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
         <text :x="SL - 16" y="164" text-anchor="end">patch</text>
       </g>
 
+      </g>
+
       <!-- divisor -->
-      <line x1="470" y1="20" x2="470" y2="290" class="div" />
+      <line v-if="!only" x1="470" y1="20" x2="470" y2="290" class="div" />
 
       <!-- ===== AF3 ===== -->
+      <g v-if="only !== 'llm'">
       <text x="510" y="12" class="hd hot">AF3 · Pairformer</text>
       <rect :x="SH - 30" y="28" :width="SZ - SH + 60" height="24" rx="12" class="diff" />
       <text :x="(SH + SZ) / 2" y="44" class="dt" text-anchor="middle">→ difusión → coordenadas 3D</text>
@@ -97,13 +104,25 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
         <circle :cx="SZ" cy="160" r="8" />
         <text :x="SZ - 16" y="164" text-anchor="end">patch</text>
       </g>
+      </g>
     </svg>
 
-    <div class="caps">
+    <div v-if="!only" class="caps">
       <div><span>cada bloque <b>lee</b> el stream y le <b>suma</b> su salida</span></div>
       <div><span><b>H</b> y <b>Z</b> son el stream de AF3 · Z sesga la atención sobre H</span></div>
     </div>
-    <p class="key">patch = reemplazar el stream en un punto y dejar que el resto de la red siga</p>
+    <p v-if="!only" class="key">patch = reemplazar el stream en un punto y dejar que el resto de la red siga</p>
+
+    <div v-if="only === 'llm'" class="side">
+      <p>cada bloque <b>lee</b> el stream y le <b>suma</b> su salida</p>
+      <p>attn trae información de <b>otros tokens</b> · MLP transforma en el lugar</p>
+      <p class="key">patch = reemplazar el stream en un punto y dejar que el resto de la red siga</p>
+    </div>
+    <div v-if="only === 'af3'" class="side">
+      <p><b>H</b> y <b>Z</b> son el residual stream de AF3</p>
+      <p>triangle escribe en Z · Z sesga la atención sobre H · ×48</p>
+      <p class="key">patch en Z, bloque ℓ → el resto del Pairformer y la difusión corren igual</p>
+    </div>
   </div>
 </template>
 
@@ -140,6 +159,14 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
 .caps span { opacity: .7; }
 .caps b { color: var(--accent); font-weight: 500; }
 .key { text-align: center; font-family: var(--font-mono); font-size: .9rem !important; color: var(--sun); margin: 1rem 0 0; }
+
+/* una sola mitad: figura a la izquierda, texto a la derecha */
+.rs.solo { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.rs.solo .fig { max-height: 340px; }
+.side { display: flex; flex-direction: column; gap: 1.1rem; font-family: var(--font-mono); }
+.side p { margin: 0; font-size: .9rem !important; line-height: 1.5; opacity: .8; }
+.side b { color: var(--accent); font-weight: 500; }
+.side .key { text-align: left; opacity: 1; margin-top: .6rem; font-size: 1rem !important; }
 
 @keyframes flow { to { stroke-dashoffset: -8; } }
 @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }

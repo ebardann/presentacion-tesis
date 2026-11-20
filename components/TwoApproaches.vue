@@ -12,7 +12,7 @@ const feats = ['hélice α', 'contacto i–j', 'hoja β', 'bolsillo', '…']
   <div class="ta">
     <!-- A -->
     <div class="panel">
-      <div class="hd"><span class="n">01</span><span class="t">ciencia normal sobre la red</span></div>
+      <div class="hd"><span class="n">01</span><span class="t">Ciencia normal sobre la red</span></div>
       <div class="tag">bottom-up · desde el modelo</div>
       <svg viewBox="0 0 380 160" class="fig" aria-label="mirar la red y experimentar sobre ella">
         <defs>
@@ -38,12 +38,12 @@ const feats = ['hélice α', 'contacto i–j', 'hoja β', 'bolsillo', '…']
           <text x="0" y="4" class="cl dim" text-anchor="middle">× agentes</text>
         </g>
       </svg>
-      <p>mirar las <b>neuronas y circuitos</b> de la red, estudiar cómo se relacionan, <b>seguir el flujo de datos</b> y correr experimentos —a escala agéntica— para poner a prueba las explicaciones.</p>
+      <p>Mirar la red por dentro y <b>experimentar</b> sobre ella.</p>
     </div>
 
     <!-- B -->
     <div class="panel">
-      <div class="hd"><span class="n">02</span><span class="t">partir de features hipotetizadas</span></div>
+      <div class="hd"><span class="n">02</span><span class="t">Partir de features hipotetizadas</span></div>
       <div class="tag">top-down · desde la hipótesis</div>
       <svg viewBox="0 0 380 160" class="fig" aria-label="extraer features con objetivos de reconstrucción">
         <defs>
@@ -69,20 +69,20 @@ const feats = ['hélice α', 'contacto i–j', 'hoja β', 'bolsillo', '…']
           <text x="6" y="21" text-anchor="middle">red original</text>
         </g>
       </svg>
-      <p>empezar con una <b>lista de features esperadas</b> e intentar extraerlas todas, diseñando <b>objetivos de reconstrucción</b> cada vez más sofisticados — usualmente <b>ignorando la red original</b>.</p>
+      <p>Extraer <b>features esperadas</b>, dejando la red de lado.</p>
     </div>
   </div>
 </template>
 
 <style scoped>
 .ta { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
-.panel { border: 1px solid var(--accent-soft); border-radius: 6px; padding: .8rem 1rem .6rem; background: rgba(0, 0, 0, .25); }
+.panel { border: 1px solid var(--accent-soft); border-radius: 6px; padding: 1.2rem 1.3rem 1.1rem; background: rgba(0, 0, 0, .25); }
 .hd { display: flex; gap: .7rem; align-items: baseline; font-family: var(--font-mono); }
 .n { color: var(--accent); font-size: .8rem; font-weight: 500; }
 .t { font-size: 1rem; }
-.tag { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .08em; opacity: .5; margin: .15rem 0 .4rem 1.75rem; }
+.tag { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .08em; opacity: .5; margin: .15rem 0 1.2rem 1.75rem; }
 .fig { width: 100%; height: auto; display: block; overflow: visible; color: var(--ink); }
-.panel p { font-size: .82rem !important; line-height: 1.45 !important; margin: .5rem 0 0; opacity: .88; }
+.panel p { font-size: .95rem !important; line-height: 1.45 !important; margin: 1.3rem 0 .1rem; opacity: .9; text-align: center; }
 .e { stroke: var(--ink); stroke-width: .6; opacity: .14; }
 .eh { stroke: var(--accent); stroke-width: 1.8; }
 circle.n { fill: var(--bg); stroke: var(--ink); stroke-width: 1; opacity: .45; }

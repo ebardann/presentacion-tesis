@@ -30,7 +30,7 @@ function seg(a: { x: number, y: number }, b: { x: number, y: number }, r = 9) {
 </script>
 
 <template>
-  <svg class="tu" viewBox="0 0 380 178" role="img" aria-label="triangle updates: Z_ij se actualiza combinando las aristas hacia un tercer residuo k">
+  <svg class="tu" viewBox="0 0 380 160" role="img" aria-label="triangle updates: Z_ij se actualiza combinando las aristas hacia un tercer residuo k">
     <defs>
       <marker id="tu-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
         <path d="M0,0 L10,5 L0,10 z" class="f-teal" />
@@ -68,8 +68,6 @@ function seg(a: { x: number, y: number }, b: { x: number, y: number }, r = 9) {
       <text :x="t.k.x" y="146" class="eq" text-anchor="middle">{{ n === 0 ? 'ik · jk → ij' : 'ki · kj → ij' }}</text>
     </g>
 
-    <text x="168" y="164" class="sub">+ triangle attention (starting / ending node)</text>
-    <text x="168" y="176" class="sub">Σ sobre todos los k · ×48 bloques</text>
   </svg>
 </template>
 
