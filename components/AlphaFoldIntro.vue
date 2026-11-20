@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// AlphaFold: secuencia → estructura 3D, y línea de tiempo.
+// AlphaFold: secuencia → estructura 3D.
 // La secuencia (ilustrativa, no es una proteína real) está anotada con su estructura secundaria;
 // los mismos colores se usan en el cartoon 3D: hélice α (teal), hebras β (leaf), loops (tinta).
 
@@ -61,13 +61,6 @@ const loops = [
   `M${S2.x2 - 2},${S2.y} C 800,${S2.y} 806,${S2.y - 4} 812,${S2.y - 12}`,         // → C-term
 ]
 
-const events = [
-  { y: '2018', t: 'AlphaFold 1', s: '1º en CASP13' },
-  { y: '2020', t: 'AlphaFold 2', s: 'CASP14 · precisión ≈ experimental' },
-  { y: '2021–22', t: 'AlphaFold DB', s: '> 200 M estructuras' },
-  { y: '2024', t: 'AlphaFold 3', s: 'all-atom · difusión' },
-  { y: '2024', t: 'Nobel de Química', s: 'Hassabis & Jumper (con Baker)' },
-]
 </script>
 
 <template>
@@ -121,14 +114,6 @@ const events = [
       <text x="580" y="176" class="lab dim">una coordenada por átomo · aquí sólo el backbone</text>
     </svg>
 
-    <div class="tl">
-      <div v-for="(e, i) in events" :key="i" class="ev" :class="{ hot: e.t === 'AlphaFold 3' }">
-        <span class="y">{{ e.y }}</span>
-        <span class="dot" />
-        <span class="t">{{ e.t }}</span>
-        <span class="s">{{ e.s }}</span>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -164,13 +149,4 @@ const events = [
 .t-h { fill: var(--teal); opacity: 1; }
 .t-e { fill: var(--leaf); opacity: 1; }
 
-.tl { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 1.1rem; position: relative; }
-.tl::before { content: ""; position: absolute; left: 0; right: 0; top: 1.62rem; border-top: 1px dashed var(--accent-soft); }
-.ev { display: flex; flex-direction: column; gap: .2rem; font-family: var(--font-mono); padding-right: .8rem; }
-.y { font-size: .75rem; color: var(--accent); }
-.dot { width: .55rem; height: .55rem; border-radius: 999px; background: var(--bg); border: 1.5px solid var(--accent); margin: .15rem 0 .25rem; position: relative; z-index: 1; }
-.t { font-size: .85rem; }
-.s { font-size: .68rem; opacity: .6; line-height: 1.35; font-family: var(--font-body); }
-.ev.hot .dot { background: var(--sun); border-color: var(--sun); box-shadow: 0 0 10px var(--sun); }
-.ev.hot .t { color: var(--sun); }
 </style>

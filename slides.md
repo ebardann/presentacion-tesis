@@ -31,28 +31,16 @@ Basado en el field assessment del 14 oct 2026 (assessment.pdf).
 -->
 
 ---
-class: theme-solar tone-sun
+class: theme-solar tone-sun mi-slide
 ---
 
 # Interpretabilidad mecanística
 
-<Slashes :items="['features', 'circuitos', 'intervenciones']" />
+<p class="lead lead-strong">Entrenamos a los modelos para que aprendan, pero <b>no decidimos qué aprenden</b>.</p>
 
-<p class="lead">Ingeniería inversa de una red entrenada: identificar <b>qué representa</b> internamente y <b>qué algoritmo implementa</b>, a partir de sus pesos y activaciones.</p>
+<MiConcepts class="mi-push" />
 
-<div class="grid gap-10 mt-4" style="grid-template-columns:1.25fr 1fr">
-<div class="rows compact">
-  <div class="r"><span class="name">feature</span><span class="what">dirección en el espacio de activaciones que codifica una propiedad del input</span></div>
-  <div class="r"><span class="name">superposición</span><span class="what">la red guarda más features que neuronas → una neurona ≠ un concepto</span></div>
-  <div class="r"><span class="name">circuito</span><span class="what">subgrafo de features y pesos que implementa un cómputo concreto</span></div>
-  <div class="r"><span class="name">intervención</span><span class="what">patch · ablación · steering: correlación no basta, hay que mover el output</span></div>
-</div>
-<div>
-<MiCircuit />
-</div>
-</div>
-
-<p class="note refs mt-3">circuits (Olah 2020) · superposición (Elhage 2022) · causal tracing (Meng 2022) · path patching (Wang 2022) · SAEs (Bricken 2023)</p>
+<p class="note refs mt-4">circuits (Olah 2020) · superposición (Elhage 2022) · causal tracing (Meng 2022) · path patching (Wang 2022) · SAEs (Bricken 2023)</p>
 
 ---
 class: theme-solar tone-teal
@@ -67,23 +55,23 @@ class: theme-solar tone-teal
 <p class="note mt-4">→ esta tesis: enfoque 01 · intervenir AF3 directamente; probes / SAEs sólo como candidatos</p>
 
 ---
-class: theme-solar tone-leaf
+class: theme-solar tone-leaf af-slide
 ---
 
 # AlphaFold
 
 <Slashes :items="['secuencia', 'estructura', 'all-atom']" />
 
-<AlphaFoldIntro class="mt-2" />
+<AlphaFoldIntro class="af-center" />
 
-<p class="note mt-5">AlphaFold permite acelerar el diseño de fármacos, el estudio de enfermedades, el desarrollo de vacunas y enzimas, y la comprensión de la vida a nivel molecular.</p>
+<p class="note">AlphaFold permite acelerar el diseño de fármacos, el estudio de enfermedades, el desarrollo de vacunas y enzimas, y la comprensión de la vida a nivel molecular.</p>
 
 ---
 class: theme-solar tone-leaf
 ---
 
 
-# La tesis en una frase
+# Tesis
 
 <Slashes :items="['AF3 congelado', 'una feature', 'coordenadas finales']" />
 
