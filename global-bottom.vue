@@ -6,8 +6,8 @@
     :items="[
       'decodificable ≠ causal ≠ mecanístico',
       'no-change patch: bit a bit',
-      'random-direction control · igual norma',
-      'seeds fijas · sample budget reportado',
+      'seeds fijas',
+      'f(x) = g(h(x))',
       'aminoácidos --> proteínas',
       'off-target intacto',
       'held-out proteins',

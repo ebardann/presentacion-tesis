@@ -3,16 +3,16 @@
     position="top"
     :speed="70"
     :items="[
-      'alphafold 3 · frozen weights',
+      'alphafold 3 - frozen weights',
       'activation patching',
-      'h\' = h_target + m ⊙ (h_source − h_target)',
+      'interpretabilidad mecanística',
       'pair Z ∈ ℝ^(N×N×128)',
       'single H ∈ ℝ^(N×384)',
-      'pairformer ×48 · recycling',
+      'pairformer',
       'diffusion → coordenadas',
       'ablate · patch · rescue',
       'MSA profundo → contacto (i, j)',
-      'JAX / haiku · capture → modify → resume',
+      'jax / ssh',
     ]"
   />
 </template>

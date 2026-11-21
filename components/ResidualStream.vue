@@ -44,7 +44,7 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
 
       <!-- ===== LLM ===== -->
       <g v-if="only !== 'af3'">
-      <text x="40" y="12" class="hd">LLM · un token</text>
+      <text x="40" y="12" class="hd">LLM - un token</text>
       <!-- stream vecino (otro token) -->
       <line :x1="NB" y1="282" :x2="NB" y2="62" class="stream dim" />
       <text :x="NB" y="296" class="sl dim" text-anchor="middle">otro token</text>
@@ -108,14 +108,15 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
     </svg>
 
     <div v-if="!only" class="caps">
-      <div><span>cada bloque <b>lee</b> el stream y le <b>suma</b> su salida</span></div>
+      <div><span>Cada bloque <b>lee</b> el stream y le <b>suma</b> su salida</span></div>
       <div><span><b>H</b> y <b>Z</b> son el stream de AF3 · Z sesga la atención sobre H</span></div>
     </div>
     <p v-if="!only" class="key">patch = reemplazar el stream en un punto y dejar que el resto de la red siga</p>
 
     <div v-if="only === 'llm'" class="side">
-      <p>cada bloque <b>lee</b> el stream y le <b>suma</b> su salida</p>
-      <p>attn trae información de <b>otros tokens</b> · MLP transforma en el lugar</p>
+      <p>Cada bloque <b>lee</b> el stream y le <b>suma</b> su salida.</p>
+      <p>attn trae información de <b>otros tokens</b>.</p>
+      <p>MLP transforma en el lugar.</p>
       <p class="key">patch = reemplazar el stream en un punto y dejar que el resto de la red siga</p>
     </div>
     <div v-if="only === 'af3'" class="side">

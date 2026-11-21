@@ -83,7 +83,7 @@ class: theme-solar tone-teal two-slide
 
 # Dos enfoques
 
-<Slashes :items="['desde la red', 'desde las features']" />
+<Slashes :items="['desde la red',  'desde las features']" />
 
 <TwoApproaches class="two-center" />
 
@@ -92,12 +92,12 @@ class: theme-solar tone-teal two-slide
 class: theme-solar tone-leaf
 ---
 
-# Activation Patching
+# Activation patching
 
 <Slashes :items="['contrast pairs', 'patch', 'localizar']" />
 
 <div style="margin-top:-.4rem">
-<div class="box hot"><h3>idea clave · contrast pairs</h3><p>prompts lo más parecidos posible, <b>salvo</b> la propiedad que nos importa → el patch aísla sólo esa diferencia.</p></div>
+<div class="box hot"><h3>Idea clave: contrast pairs</h3><p>Prompts lo más parecidos posible, <b>salvo</b> la propiedad que nos importa → el patch aísla solo esa diferencia.</p></div>
 </div>
 
 <ContrastPatching class="mt-3" />
