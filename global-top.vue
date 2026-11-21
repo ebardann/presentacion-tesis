@@ -10,7 +10,7 @@
       'single H ∈ ℝ^(N×384)',
       'pairformer',
       'diffusion → coordenadas',
-      'ablate · patch · rescue',
+      'h′ = h_target + m ⊙ (h_source − h_target)',
       'MSA profundo → contacto (i, j)',
       'jax / ssh',
     ]"

@@ -31,6 +31,14 @@ Basado en el field assessment del 14 oct 2026 (assessment.pdf).
 -->
 
 ---
+class: theme-solar tone-teal toc-slide
+---
+
+# Indice
+
+<TocMap class="toc-center" />
+
+---
 class: theme-solar tone-sun mi-slide
 transition: view-transition
 ---
