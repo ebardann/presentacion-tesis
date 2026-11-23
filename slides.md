@@ -95,8 +95,6 @@ class: theme-solar tone-leaf
 
 # Tesis
 
-<Slashes :items="['AF3 congelado', 'una feature', 'coordenadas finales']" />
-
 <p class="big-quote">
 Usar <b>activation patching</b> sobre un <b>AlphaFold 3 congelado</b> para conectar
 <b>una feature o vía interna</b> con un <b>cambio selectivo y reproducible</b>
@@ -221,98 +219,56 @@ sino geometría 3D (vía difusión).
 -->
 
 ---
-class: theme-solar tone-teal rs-slide
+class: theme-solar tone-teal rc-slide
 ---
 
 # Flujo residual
 
-<ResidualStream only="llm" class="rs-center" />
+<ResidualCompare class="rc-center" />
 
 <!--
-El flujo residual es el "bus" de la red: cada bloque lee de él y le suma su salida.
-En un LLM, attention mueve información entre tokens y el MLP la transforma en el lugar.
-(La versión AF3 —H y Z como streams— se ve en "Dónde se interviene".)
-Activation patching = capturar el stream en un punto, modificarlo y reanudar el resto de la red.
-(QK/OV circuits —Elhage 2021— son la descomposición fina de las heads en LLMs; no se usan en esta tesis.)
+El flujo residual es el "bus" de la red: cada bloque lee de él y le suma (⊕) su salida; nada se reemplaza.
+LLM: un solo flujo x (L×d); attention mezcla entre tokens, el MLP transforma cada token. × N capas.
+AF3 · Pairformer: dos flujos. Z (N×N×128, por par) recibe triangle multiplicative updates, triangle attention y
+transition; H (N×384, por residuo) recibe attention con pair bias —Z sesga los pesos— y transition. × 48 bloques.
+Al final H y Z condicionan la difusión, que genera las coordenadas.
+Activation patching = capturar el flujo en un punto (aquí: Z en el bloque ℓ / recycle, pares i,j), reemplazarlo
+por h' y dejar que todo lo que sigue corra igual, con seeds fijos.
 -->
 
 ---
-class: theme-solar tone-teal rs-slide
----
-
-# Dónde se interviene
-
-<ResidualStream only="af3" class="rs-center" />
-
-<!--
-Mismo concepto que en LLMs: en AF3 el flujo residual son H (single, N×384) y Z (pair, N×N×128).
-Triangle updates escriben en Z; la atención sobre H está sesgada por Z (pair bias). ×48 bloques.
-El patch se aplica en Z (pares i,j / canales / bloque ℓ / recycle) y todo lo que sigue —el resto del
-Pairformer y la difusión— corre igual, con seeds fijos.
--->
-
----
-class: theme-solar tone-teal
+class: theme-solar tone-teal dp-slide
 ---
 
 # Diseño principal
 
 <ContactGlyph />
 
-<div class="note" style="margin:1.4rem 0 .2rem">
+<div class="note" style="margin:.6rem 0 0">
 
 $f(x) = g(h(x))$ &nbsp;·&nbsp; $h' = h_{\text{target}} + m \odot (h_{\text{source}} - h_{\text{target}})$
 
 </div>
 
-<PatchingRuns />
+<PatchingRuns class="dp-center" />
 
 ---
-class: theme-solar tone-leaf
+class: theme-solar tone-leaf pc-slide
 ---
 
 # Protocolo y controles
 
-<Slashes :items="['de decodificable a mecanístico', 'controles']" />
+<SuccessCriteria class="pc-center" />
 
-<div class="steps mt-2" style="grid-template-columns:repeat(4, 1fr); gap:1.6rem">
-  <div class="st"><span class="n">1</span><span class="t">probe</span><span class="d">antes de intervenir: ¿una dirección en Z_ij predice el contacto?</span><span class="lv">decodificable</span></div>
-  <div class="st seen"><span class="n">2</span><span class="t">patch</span><span class="d">el diseño principal</span><span class="lv">causal</span></div>
-  <div class="st"><span class="n">3</span><span class="t">vía</span><span class="d">path patching: cómo viaja la señal hasta la difusión</span><span class="lv">mecanístico</span></div>
-  <div class="st"><span class="n">4</span><span class="t">generalizar</span><span class="d">familias de proteínas held-out</span><span class="lv">reproducible</span></div>
-</div>
-
-<div class="grid grid-cols-2 gap-x-12 mt-10">
-<div class="rows inline-rows">
-  <div class="r"><span class="name">no-change patch</span><span class="what">h' = h debe dar el mismo output bit a bit</span></div>
-  <div class="r"><span class="name">edits random</span><span class="what">igual norma → descarta daño genérico</span></div>
-</div>
-<div class="rows inline-rows">
-  <div class="r"><span class="name">pair-scaling</span><span class="what">comparar contra la perilla global</span></div>
-  <div class="r"><span class="name">leakage</span><span class="what">post-cutoff ≠ sin homólogos en training</span></div>
-</div>
-</div>
-
-<p class="note mt-10" style="opacity:.9">Éxito → la explicación predice cuándo funciona, cuándo falla y qué queda intacto</p>
-
----
-class: theme-solar tone-teal
----
-
-# Endpoints
-
-<Slashes :items="['geometría', 'distograma', 'confianza']" />
-
-| endpoint | métrica |
-|---|---|
-| contacto objetivo | $d(i,j)$ Cα/Cβ · $C_{ij} = \mathbb{1}[d(i,j) < \tau]$ · p.ej. Cβ, 8 Å |
-| estructura local / global | lddt · tm-score · rmsd |
-| daño off-target | Δ lddt / distancias fuera de la región objetivo |
-| distograma (vs. alphainterp) | distribución y entropía en (i, j) — reportado aparte |
-| confianza | plddt · pae · iptm — confianza, **no** precisión |
-| ligandos | posebusters · ligand rmsd · lddt-pli |
-
-<p class="note mt-4">Diferencias chicas sin barras de error no son resultados.</p>
+<!--
+Criterio de éxito (assessment p.16): la explicación predice cuándo funciona la intervención, cuándo falla y qué
+otras salidas quedan intactas. El protocolo y los controles se organizan alrededor de eso:
+1 · cuándo funciona: probe (decodificable) → patch y rescate (causal) → path patching hasta la difusión (mecanístico).
+2 · cuándo falla: generalizar a familias held-out prediciendo de antemano aciertos y fallos; contactos que no
+    dependen del MSA son controles negativos naturales; ojo con leakage (post-cutoff no excluye homólogos).
+3 · qué queda intacto: no-change patch bit a bit; edits random de igual norma (descarta daño genérico);
+    comparar contra pair-scaling global a magnitud y presupuesto de samples equivalentes; lDDT fuera de (i, j).
+-->
 
 ---
 class: theme-solar tone-sun

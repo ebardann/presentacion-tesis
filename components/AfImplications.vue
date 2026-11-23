@@ -1,12 +1,12 @@
 <script setup lang="ts">
 // Si entendiéramos AlphaFold por completo: la caja abierta al centro y cuatro implicaciones alrededor.
 const left = [
-  { k: 'prec', t: 'Precisión', q: 'predecir mejor', d: 'saber por qué falla una predicción y corregir la causa: MSA, templates o el modelo' },
-  { k: 'ctrl', t: 'Control', q: 'dirigir la predicción', d: 'cambiar un contacto o pedir un estado alternativo a propósito, no por azar' },
+  { k: 'prec', t: 'Precisión', q: 'predecir mejor' },
+  { k: 'ctrl', t: 'Control', q: 'dirigir la predicción' },
 ]
 const right = [
-  { k: 'drug', t: 'Diseño de fármacos', q: 'mejores candidatos', d: 'saber qué sostiene una pose proteína–ligando antes de sintetizar y probar' },
-  { k: 'disc', t: 'Descubrimiento', q: 'aprender del modelo', d: 'reglas geométricas que aprendió → hipótesis biológicas para verificar' },
+  { k: 'drug', t: 'Diseño de fármacos', q: 'mejores candidatos' },
+  { k: 'disc', t: 'Descubrimiento', q: 'aprender del modelo' },
 ]
 // red dentro de la caja: 3 capas, una vía resaltada
 const layers = [0, 1, 2, 3].map(l => [0, 1, 2].map(r => ({ x: 404 + l * 50, y: 132 + r * 34 })))
@@ -31,7 +31,7 @@ const edges = layers.slice(0, -1).flatMap((col, l) => col.flatMap((a, i) => laye
             <path d="M14,20 L25,23" class="hot-s" marker-end="url(#imp-a)" />
           </template>
         </svg>
-        <div><div class="t">{{ c.t }}</div><div class="q">{{ c.q }}</div><div class="d">{{ c.d }}</div></div>
+        <div><div class="t">{{ c.t }}</div><div class="q">{{ c.q }}</div></div>
       </div>
     </div>
 
@@ -71,15 +71,19 @@ const edges = layers.slice(0, -1).flatMap((col, l) => col.flatMap((a, i) => laye
             <circle cx="20" cy="17" r="3" class="hot" />
           </template>
         </svg>
-        <div><div class="t">{{ c.t }}</div><div class="q">{{ c.q }}</div><div class="d">{{ c.d }}</div></div>
+        <div><div class="t">{{ c.t }}</div><div class="q">{{ c.q }}</div></div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.imp { display: grid; grid-template-columns: 1fr 1.15fr 1fr; align-items: center; gap: .6rem; }
-.side { display: flex; flex-direction: column; gap: 1.1rem; }
+.imp { display: grid; grid-template-columns: 1fr 1.15fr 1fr; align-items: stretch; gap: .6rem; }
+/* las cajas se centran donde terminan los rayos: y = 90 y 260 del viewBox (40 → 320) */
+.side { position: relative; }
+.side .card { position: absolute; left: 0; right: 0; transform: translateY(-50%); }
+.side .card:nth-child(1) { top: calc(50 / 280 * 100%); }
+.side .card:nth-child(2) { top: calc(220 / 280 * 100%); }
 .card { display: flex; gap: .8rem; align-items: flex-start; border: 1px solid rgba(143, 227, 106, .22); border-left: 2px solid var(--leaf);
   border-radius: 6px; padding: .7rem .85rem; background: linear-gradient(90deg, rgba(143, 227, 106, .07), rgba(0, 0, 0, .25) 60%); }
 .ico { width: 2.1rem; height: 2.1rem; flex: 0 0 auto; overflow: visible; }
@@ -90,7 +94,6 @@ const edges = layers.slice(0, -1).flatMap((col, l) => col.flatMap((a, i) => laye
 .ico .hot-s { stroke: var(--leaf); stroke-width: 1.6; opacity: 1; stroke-linecap: round; }
 .t { font-size: 1.05rem; font-weight: 400; line-height: 1.2; }
 .q { font-family: var(--font-mono); font-size: .7rem; color: var(--leaf); margin-top: .15rem; }
-.d { font-size: .72rem; line-height: 1.4; opacity: .65; margin-top: .35rem; font-weight: 300; }
 
 .core { width: 100%; height: auto; overflow: visible; color: var(--ink); }
 .spoke { stroke: var(--leaf); stroke-width: 1.2; stroke-dasharray: 4 4; opacity: .55; animation: flow 1.4s linear infinite; }

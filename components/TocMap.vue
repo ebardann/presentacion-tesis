@@ -4,9 +4,9 @@
 const sections = [
   { n: '01', t: 'Tesis', q: '¿qué propongo?', tone: 'leaf', from: 3, to: 8, icon: 'fold' },
   { n: '02', t: 'Motivación', q: '¿por qué importa?', tone: 'coral', from: 9, to: 11, icon: 'papers' },
-  { n: '03', t: 'Justificación', q: '¿por qué estudiar AlphaFold es viable?', tone: 'sun', from: 12, to: 14, icon: 'layers' },
-  { n: '04', t: 'Diseño', q: '¿cómo lo voy a probar?', tone: 'teal', from: 15, to: 17, icon: 'patch' },
-  { n: '05', t: 'Estado actual', q: '¿dónde estoy?', tone: 'sun', from: 18, to: 18, icon: 'progress' },
+  { n: '03', t: 'Justificación', q: '¿por qué estudiar AlphaFold es viable?', tone: 'sun', from: 12, to: 13, icon: 'layers' },
+  { n: '04', t: 'Diseño', q: '¿cómo lo voy a probar?', tone: 'teal', from: 14, to: 15, icon: 'patch' },
+  { n: '05', t: 'Estado actual', q: '¿dónde estoy?', tone: 'sun', from: 16, to: 16, icon: 'progress' },
 ]
 const grid = Array.from({ length: 16 }, (_, k) => ({ r: Math.floor(k / 4), c: k % 4 }))
 </script>

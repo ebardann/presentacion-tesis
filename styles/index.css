@@ -164,9 +164,6 @@
 .slidev-layout.jump-slide { display: flex; flex-direction: column; }
 .slidev-layout.jump-slide .jump-center { margin: auto 0; }
 
-/* slide 6 · residual stream */
-.slidev-layout.rs-slide { display: flex; flex-direction: column; }
-.slidev-layout.rs-slide .rs-center { margin: auto 0; }
 
 /* dos enfoques: paneles centrados en el alto disponible */
 .slidev-layout.two-slide { display: flex; flex-direction: column; }
@@ -196,3 +193,15 @@
 .slidev-layout.imp-slide { display: flex; flex-direction: column; }
 .slidev-layout.imp-slide .imp-center { margin: auto 0; }
 .slidev-layout .note.imp-key { text-align: center; font-size: .8rem; margin: 0; }
+
+/* diseño principal: el diagrama de corridas llena el alto libre */
+.slidev-layout.dp-slide { display: flex; flex-direction: column; }
+.slidev-layout.dp-slide .dp-center { margin: auto 0; }
+
+/* protocolo y controles: organizado alrededor del criterio de éxito */
+.slidev-layout.pc-slide { display: flex; flex-direction: column; }
+.slidev-layout.pc-slide .pc-center { margin: auto 0; }
+
+/* flujo residual: comparación centrada */
+.slidev-layout.rc-slide { display: flex; flex-direction: column; }
+.slidev-layout.rc-slide .rc-center { margin: auto 0; }

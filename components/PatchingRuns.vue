@@ -83,7 +83,7 @@ function blockClass(kind: string, i: number) {
 </template>
 
 <style scoped>
-.pr { width: 100%; height: auto; max-height: 275px; display: block; color: var(--ink); overflow: visible; }
+.pr { width: 100%; height: auto; max-height: 318px; display: block; color: var(--ink); overflow: visible; }
 .box { stroke-width: 1.4; }
 .box.clean { fill: rgba(143, 227, 106, .14); stroke: var(--leaf); }
 .box.bad { fill: rgba(255, 111, 89, .12); stroke: var(--coral); }

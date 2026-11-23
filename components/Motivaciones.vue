@@ -12,7 +12,7 @@ const parts = [
     out: 'en qué se basa cada predicción',
   },
   {
-    n: '03', tone: 'coral', icon: 'gap', t: 'La brecha',
+    n: '03', tone: 'coral', icon: 'gap', t: 'Trabajo previo',
     claim: 'Nadie sigue una feature hasta la estructura 3D',
     out: 'feature → coords 3D',
   },

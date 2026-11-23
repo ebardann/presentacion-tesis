@@ -5,7 +5,7 @@ defineProps<{ active: 1 | 2 | 3 }>()
 const items = [
   { n: '01', t: 'Interpretabilidad', tone: 'sun' },
   { n: '02', t: 'AlphaFold 3', tone: 'leaf' },
-  { n: '03', t: 'La brecha', tone: 'coral' },
+  { n: '03', t: 'Trabajo previo', tone: 'coral' },
 ]
 </script>
 
