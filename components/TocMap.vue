@@ -2,16 +2,11 @@
 // Tabla de contenidos: cinco secciones como un recorrido, cada una con su tono y su pregunta.
 // `from` = primera slide de la sección (routerMode: hash → #/n).
 const sections = [
-  { n: '01', t: 'Interpretabilidad', q: '¿por qué abrir el modelo?', tone: 'sun', from: 3, to: 8,
-    items: ['técnicas por pregunta', 'la brecha', 'activation patching', 'residual stream'], icon: 'net' },
-  { n: '02', t: 'AlphaFold 3', q: '¿qué modelo abrimos?', tone: 'leaf', from: 9, to: 15,
-    items: ['de LLMs a proteínas', 'arquitectura', 'MSA · Pairformer', 'dónde se interviene'], icon: 'fold' },
-  { n: '03', t: 'Trabajo previo', q: '¿qué falta?', tone: 'coral', from: 16, to: 16,
-    items: ['AlphaInterp', 'pair scaling', 'SAEs en proteínas'], icon: 'papers' },
-  { n: '04', t: 'Tesis', q: '¿qué propongo?', tone: 'teal', from: 17, to: 20,
-    items: ['diseño principal', 'protocolo y controles', 'endpoints'], icon: 'patch' },
-  { n: '05', t: 'Estado actual', q: '¿dónde estoy?', tone: 'sun', from: 21, to: 21,
-    items: ['hecho', 'en espera', 'siguiente'], icon: 'progress' },
+  { n: '01', t: 'Tesis', q: '¿qué propongo?', tone: 'leaf', from: 3, to: 8, icon: 'fold' },
+  { n: '02', t: 'Motivación', q: '¿por qué importa?', tone: 'coral', from: 9, to: 11, icon: 'papers' },
+  { n: '03', t: 'Justificación', q: '¿por qué estudiar AlphaFold es viable?', tone: 'sun', from: 12, to: 14, icon: 'layers' },
+  { n: '04', t: 'Diseño', q: '¿cómo lo voy a probar?', tone: 'teal', from: 15, to: 17, icon: 'patch' },
+  { n: '05', t: 'Estado actual', q: '¿dónde estoy?', tone: 'sun', from: 18, to: 18, icon: 'progress' },
 ]
 const grid = Array.from({ length: 16 }, (_, k) => ({ r: Math.floor(k / 4), c: k % 4 }))
 </script>
@@ -40,6 +35,11 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ r: Math.floor(k / 4), c: k 
               <circle cx="11" cy="15" r="2.6" class="hot" /><circle cx="27" cy="22" r="2.6" class="hot" />
               <line x1="11" y1="15" x2="27" y2="22" class="dash" />
             </template>
+            <template v-else-if="s.icon === 'layers'">
+              <rect x="6" y="6" width="28" height="6" rx="1.5" class="soft" />
+              <rect x="6" y="17" width="28" height="6" rx="1.5" class="hot" />
+              <rect x="6" y="28" width="28" height="6" rx="1.5" class="soft" />
+            </template>
             <template v-else-if="s.icon === 'papers'">
               <rect x="12" y="5" width="20" height="26" rx="2" class="soft" />
               <rect x="7" y="10" width="20" height="26" rx="2" />
@@ -59,9 +59,6 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ r: Math.floor(k / 4), c: k 
         </div>
         <div class="title">{{ s.t }}</div>
         <div class="q">{{ s.q }}</div>
-        <ul>
-          <li v-for="it in s.items" :key="it">{{ it }}</li>
-        </ul>
       </div>
     </a>
   </div>
@@ -83,14 +80,14 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ r: Math.floor(k / 4), c: k 
 .dot::after { content: ""; position: absolute; inset: 3px; border-radius: 999px; background: var(--c); }
 .range { font-family: var(--font-mono); font-size: .62rem; letter-spacing: .08em; opacity: .45; }
 
-.card { border: 1px solid var(--cs); border-top: 2px solid var(--c); border-radius: 6px; padding: .85rem .9rem 1rem;
+.card { border: 1px solid var(--cs); border-top: 2px solid var(--c); border-radius: 6px; padding: .8rem .75rem .9rem;
   background: linear-gradient(180deg, color-mix(in srgb, var(--c) 7%, transparent), rgba(0, 0, 0, .25) 55%);
-  min-height: 15.5rem; transition: transform .2s ease, box-shadow .2s ease; }
+  min-height: 10rem; transition: transform .2s ease, box-shadow .2s ease; }
 .sec:hover .card { transform: translateY(-3px); box-shadow: 0 0 26px var(--cs); }
 
 .head { display: flex; align-items: flex-start; justify-content: space-between; }
-.num { font-family: var(--font-display); font-size: 2.3rem; line-height: 1; color: var(--c); text-shadow: 0 0 18px var(--cs); }
-.ico { width: 2.3rem; height: 2.3rem; overflow: visible; }
+.num { font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--c); text-shadow: 0 0 18px var(--cs); }
+.ico { width: 2rem; height: 2rem; overflow: visible; }
 .ico line, .ico circle, .ico rect, .ico path { fill: none; stroke: var(--ink); stroke-width: 1.3; opacity: .7; }
 .ico .bb { stroke-linecap: round; }
 .ico .dash { stroke: var(--c); stroke-dasharray: 2 2; opacity: 1; }
@@ -102,11 +99,8 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ r: Math.floor(k / 4), c: k 
 .ico text.q { fill: var(--c); font-family: var(--font-mono); font-size: 13px; }
 .ico .blink { animation: blink 1.4s steps(1) infinite; }
 
-.title { font-size: 1.15rem; font-weight: 400; margin-top: .75rem; line-height: 1.2; }
-.q { font-family: var(--font-mono); font-size: .7rem; color: var(--c); margin-top: .3rem; letter-spacing: .02em; }
-ul { list-style: none; padding: 0 !important; margin: .8rem 0 0; border-top: 1px dashed var(--cs); padding-top: .55rem !important; }
-li { font-family: var(--font-mono); font-size: .68rem !important; line-height: 1.5 !important; opacity: .7; padding: .1rem 0; }
-li::before { content: "› "; color: var(--c); }
+.title { font-size: 1.1rem; font-weight: 400; margin-top: .75rem; line-height: 1.2; }
+.q { font-family: var(--font-mono); font-size: .72rem; color: var(--c); margin-top: .3rem; letter-spacing: .02em; }
 
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes blink { 50% { opacity: 0; } }

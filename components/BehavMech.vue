@@ -11,7 +11,7 @@ const net = L.slice(0, -1).flatMap((a, l) => a.ys.flatMap((y1, i) => L[l + 1].ys
   x1: a.x, y1, x2: L[l + 1].x, y2, hot: hotE.has(`${l}-${i}-${j}`),
 }))))
 const hotN = new Set(['0-1', '1-2', '2-1', '3-1'])
-const halves = [{ vb: '0 24 450 188', vt: 'vt-beh' }, { vb: '450 24 450 188', vt: 'vt-mech' }]
+const halves = [{ vb: '0 24 450 188' }, { vb: '450 24 450 188' }]
 const mechPath = `M${OFF + 50},130 L630,114 L670,146 L710,114 L750,114 L${OFF + 334},130`
 </script>
 
@@ -19,7 +19,7 @@ const mechPath = `M${OFF + 50},130 L630,114 L670,146 L710,114 L750,114 L${OFF + 
   <div class="bm">
     <!-- dos mitades del mismo dibujo: cada una hace morph (view-transition) a su tarjeta en "Técnicas por pregunta" -->
     <div class="halves">
-    <svg v-for="h in halves" :key="h.vt" :viewBox="h.vb" class="fig" :style="{ viewTransitionName: h.vt }" role="img" aria-label="interpretabilidad conductual: caja negra con pares entrada-salida; mecanística: la caja abierta con el camino interno">
+    <svg v-for="h in halves" :key="h.vb" :viewBox="h.vb" class="fig" role="img" aria-label="interpretabilidad conductual: caja negra con pares entrada-salida; mecanística: la caja abierta con el camino interno">
       <defs>
         <marker id="bm-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)" opacity=".45" /></marker>
       </defs>
@@ -67,8 +67,8 @@ const mechPath = `M${OFF + 50},130 L630,114 L670,146 L710,114 L750,114 L${OFF + 
     </div>
 
     <div class="caps">
-      <div><b style="view-transition-name: vt-beh-t">conductual</b><span>caja negra · sólo pares (x, f(x)) → <i>qué</i> hace</span></div>
-      <div><b class="hot" style="view-transition-name: vt-mech-t">mecanística</b><span>caja abierta · el cómputo interno → <i>cómo</i> lo hace</span></div>
+      <div><b>conductual</b><span>caja negra · sólo pares (x, f(x)) → <i>qué</i> hace</span></div>
+      <div><b class="hot">mecanística</b><span>caja abierta · el cómputo interno → <i>cómo</i> lo hace</span></div>
     </div>
   </div>
 </template>

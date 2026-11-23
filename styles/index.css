@@ -122,17 +122,8 @@
 .slidev-layout.center > :has(> .glitch-bg) { position: static; }
 .slidev-layout.center > :has(> .glitch-bg) > :not(.glitch-bg) { position: relative; z-index: 1; }
 
-/* ---------- transición arquitectura → módulo (view-transition) ---------- */
-.slidev-layout .vt-chip {
-  position: absolute !important; top: 3.6rem; right: 3rem; z-index: 2;
-  font-family: var(--font-mono); font-size: .85rem; letter-spacing: .04em; color: var(--sun);
-  padding: .45rem .9rem; border: 1px solid var(--sun); border-radius: 4px; background: #221c08;
-  box-shadow: 0 0 24px rgba(255, 194, 75, .3);
-}
-::view-transition-group(msa-box), ::view-transition-group(pf-box) { animation-duration: .6s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
 .slidev-layout .box h3 { margin: 0; font-size: .95rem; }
 .slidev-layout .box p { font-size: .82rem; line-height: 1.45; margin: .35rem 0 0; opacity: .85; }
-.mm-big { max-height: 165px !important; }
 .slidev-layout .grid > .box { padding: .6rem .9rem; }
 .slidev-layout .tight li { font-size: .9rem; line-height: 1.4; margin: .15rem 0; }
 .slidev-layout .tight ul { margin: 0; }
@@ -177,29 +168,31 @@
 .slidev-layout.rs-slide { display: flex; flex-direction: column; }
 .slidev-layout.rs-slide .rs-center { margin: auto 0; }
 
-/* pairformer: visual a pantalla */
-.slidev-layout .pf-grid { margin-top: 1.6rem; }
-.slidev-layout .note.pf-key { text-align: center; margin-top: 2rem; font-size: .95rem; opacity: .85; }
-
 /* dos enfoques: paneles centrados en el alto disponible */
 .slidev-layout.two-slide { display: flex; flex-direction: column; }
 .slidev-layout.two-slide .two-center { margin: auto 0; }
 
-/* técnicas por pregunta */
-.slidev-layout.qdc-slide { display: flex; flex-direction: column; }
-.slidev-layout.qdc-slide .qdc-center { margin: auto 0; }
-
-/* morph interpretabilidad → técnicas por pregunta: sin deformar los dibujos */
-::view-transition-group(vt-beh), ::view-transition-group(vt-mech),
-::view-transition-group(vt-beh-t), ::view-transition-group(vt-mech-t) { animation-duration: .7s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
-::view-transition-old(vt-beh), ::view-transition-new(vt-beh),
-::view-transition-old(vt-mech), ::view-transition-new(vt-mech) { height: 100%; width: 100%; object-fit: contain; }
-
 /* trabajo previo: matriz centrada */
 .slidev-layout.pw-slide { display: flex; flex-direction: column; }
-.slidev-layout.pw-slide .pw-center { margin: -.6rem 0 0; }
+.slidev-layout.pw-slide .pw-center { margin: -.6rem 0 0; zoom: .86; }
 .slidev-layout .note.pw-key { text-align: center; margin: 1rem 0 auto; font-size: 1rem; opacity: .9; }
 
 /* tabla de contenidos */
 .slidev-layout.toc-slide { display: flex; flex-direction: column; }
 .slidev-layout.toc-slide .toc-center { margin: auto 0; }
+
+/* motivación: tres columnas centradas */
+.slidev-layout.mot-slide { display: flex; flex-direction: column; }
+.slidev-layout.mot-slide .mot-center { margin: auto 0; }
+.slidev-layout .note.mot-key { text-align: center; margin: .9rem 0 auto; font-size: .9rem; opacity: .9; }
+
+/* motivación → sus tres slides: las tarjetas se encogen en el rastreador (view-transition) */
+::view-transition-group(mot-1), ::view-transition-group(mot-2), ::view-transition-group(mot-3) { animation-duration: .65s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
+::view-transition-old(mot-1), ::view-transition-new(mot-1),
+::view-transition-old(mot-2), ::view-transition-new(mot-2),
+::view-transition-old(mot-3), ::view-transition-new(mot-3) { height: 100%; width: 100%; object-fit: fill; }
+
+/* si entendiéramos alphafold */
+.slidev-layout.imp-slide { display: flex; flex-direction: column; }
+.slidev-layout.imp-slide .imp-center { margin: auto 0; }
+.slidev-layout .note.imp-key { text-align: center; font-size: .8rem; margin: 0; }

@@ -35,7 +35,7 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
 
 <template>
   <div class="rs" :class="only ? `solo ${only}` : ''">
-    <svg :viewBox="vb" class="fig" role="img" aria-label="residual stream: cada bloque lee y suma al stream; en AF3 los streams son H y Z; el patch reemplaza el stream en un punto">
+    <svg :viewBox="vb" class="fig" role="img" aria-label="flujo residual: cada bloque lee y suma al stream; en AF3 los streams son H y Z; el patch reemplaza el stream en un punto">
       <defs>
         <marker id="rs-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)" opacity=".55" /></marker>
         <marker id="rs-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)" /></marker>
@@ -120,7 +120,7 @@ const grid = Array.from({ length: 16 }, (_, k) => ({ x: SZ - 14 + (k % 4) * 7, y
       <p class="key">patch = reemplazar el stream en un punto y dejar que el resto de la red siga</p>
     </div>
     <div v-if="only === 'af3'" class="side">
-      <p><b>H</b> y <b>Z</b> son el residual stream de AF3</p>
+      <p><b>H</b> y <b>Z</b> son el flujo residual de AF3</p>
       <p>triangle escribe en Z · Z sesga la atención sobre H · ×48</p>
       <p class="key">patch en Z, bloque ℓ → el resto del Pairformer y la difusión corren igual</p>
     </div>

@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useSlideContext } from '@slidev/client'
-// el slide debe declarar `clicks: 2` en su frontmatter
-const { $clicks } = useSlideContext()
 // Ilustración de activation patching en tres corridas:
 // clean (msa profundo) · corrupted (msa superficial) · patched (corrupted + h del clean en el bloque ℓ).
 const lanes = [
@@ -38,7 +35,7 @@ function blockClass(kind: string, i: number) {
       </marker>
     </defs>
 
-    <g v-for="(l, li) in lanes" :key="l.n" class="step" :class="{ off: $clicks < li }">
+    <g v-for="(l, li) in lanes" :key="l.n">
       <!-- etiqueta -->
       <text x="0" :y="l.y - 6" class="lbl-n" :class="'t-' + (l.kind === 'patch' ? 'patch' : l.kind)">{{ l.n }}</text>
       <text x="0" :y="l.y + 14" class="lbl">{{ l.name }}</text>
@@ -77,7 +74,7 @@ function blockClass(kind: string, i: number) {
     <text x="790" y="14" class="col" text-anchor="middle">difusión → coordenadas</text>
 
     <!-- flecha de patch: h del clean → bloque ℓ del patched -->
-    <g class="step" :class="{ off: $clicks < 2 }">
+    <g>
       <path d="M508,77 V108 H468 V224 H508 V259" class="patch-wire" marker-end="url(#pr-arr-g)" />
       <text x="522" y="104" class="patch-lbl">copiar h_source → h'</text>
       <text x="522" y="120" class="patch-lbl dim">m: pares (i, j) · canales · capa · recycle</text>
@@ -87,8 +84,6 @@ function blockClass(kind: string, i: number) {
 
 <style scoped>
 .pr { width: 100%; height: auto; max-height: 275px; display: block; color: var(--ink); overflow: visible; }
-.step { transition: opacity .35s ease; }
-.step.off { opacity: 0; }
 .box { stroke-width: 1.4; }
 .box.clean { fill: rgba(143, 227, 106, .14); stroke: var(--leaf); }
 .box.bad { fill: rgba(255, 111, 89, .12); stroke: var(--coral); }
