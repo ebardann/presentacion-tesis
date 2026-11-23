@@ -90,26 +90,23 @@ class: theme-solar tone-leaf
 <p class="note refs mt-2">h' = h_B + m ⊙ (h_A − h_B) · m = token del nombre, capa ℓ · variantes: ablación · rescate · steering</p>
 
 ---
-class: theme-solar tone-leaf
+class: theme-solar tone-leaf ts-slide
 ---
 
 # Tesis
 
-<p class="big-quote">
+<p class="ts-quote">
 Usar <b>activation patching</b> sobre un <b>AlphaFold 3 congelado</b> para conectar
 <b>una feature o vía interna</b> con un <b>cambio selectivo y reproducible</b>
 en las coordenadas 3D generadas por difusión.
 </p>
 
-<ThesisStrip class="mt-5" />
-
-<div class="kv mt-4">
-  <div><span class="k">selectivo</span> cambia la propiedad objetivo · el resto de la estructura se preserva</div>
-  <div><span class="k">reproducible</span> se sostiene entre seeds, controles pareados y proteínas held-out</div>
-</div>
+<ThesisStrip class="ts-strip" />
 
 <!--
 El assessment lo identifica como la oportunidad abierta más fuerte en MI de predictores de estructura (p.5).
+selectivo: cambia la propiedad objetivo · el resto de la estructura se preserva.
+reproducible: se sostiene entre seeds, controles pareados y proteínas held-out.
 -->
 
 ---
@@ -244,13 +241,77 @@ class: theme-solar tone-teal dp-slide
 
 <ContactGlyph />
 
-<div class="note" style="margin:.6rem 0 0">
+<PatchingRuns class="dp-center" />
 
-$f(x) = g(h(x))$ &nbsp;·&nbsp; $h' = h_{\text{target}} + m \odot (h_{\text{source}} - h_{\text{target}})$
+<!--
+Contacto: Cβ–Cβ, τ = 8 Å, medido en las coordenadas finales (difusión), no en el distograma.
+-->
+
+---
+class: theme-solar tone-teal iv-slide
+---
+
+# La intervención
+
+<div class="iv">
+
+<div class="iv-row">
+<div class="iv-eq">
+
+$$f(x) = g\big(h(x)\big)$$
+
+</div>
+<div class="iv-leg">
+<div><span class="k">h</span>activación interna · Z en el bloque ℓ</div>
+<div><span class="k">g</span>el resto de AF3 · Pairformer + difusión</div>
+</div>
+</div>
+
+<div v-click class="iv-row iv-patch">
+<div class="iv-eq">
+
+$$f'(x) = g\big(\textcolor{#ffc24b}{h'}(x)\big)$$
+
+</div>
+<div class="iv-def">
+
+$$\textcolor{#ffc24b}{h'} = h_{\text{target}} + m \odot \left(h_{\text{source}} - h_{\text{target}}\right)$$
+
+<div class="iv-terms">
+<div><span class="k">h_target</span>corrida con MSA superficial · el contacto se pierde</div>
+<div><span class="k">h_source</span>corrida con MSA profundo · el contacto está</div>
+<div><span class="k">m</span>máscara: pares (i, j) · canales · bloque ℓ · recycle</div>
+</div>
+</div>
+</div>
+
+<div v-click class="iv-cmp">
+<div class="c bad">
+
+$g(h)$
+
+<span class="r">contacto perdido · d(i, j) &gt; τ</span>
+</div>
+<div class="vs">vs</div>
+<div class="c good">
+
+$g(\textcolor{#ffc24b}{h'})$
+
+<span class="r">¿vuelve el contacto? · d(i, j) &lt; τ</span>
+</div>
+<div class="iv-concl">si vuelve el contacto y el resto queda igual → <b>h' lleva la información causal</b></div>
+</div>
 
 </div>
 
-<PatchingRuns class="dp-center" />
+<!--
+f se escribe como composición: h es la activación en el punto que intervenimos (Z en el bloque ℓ, en un recycle),
+g es todo lo que viene después (el resto del Pairformer y la difusión, que genera las coordenadas).
+Click 1: reemplazamos h por h'. h' es la activación de la corrida "mala" (MSA superficial) a la que le copiamos,
+sólo donde m = 1, la de la corrida "buena" (MSA profundo). m selecciona pares (i, j), canales, bloque y recycle.
+Click 2: comparamos g(h) con g(h'): misma entrada, misma seed; lo único distinto es h'. Si el contacto vuelve y el
+resto de la estructura no cambia, esa parte de h es causal para el contacto.
+-->
 
 ---
 class: theme-solar tone-leaf pc-slide

@@ -205,3 +205,32 @@
 /* flujo residual: comparación centrada */
 .slidev-layout.rc-slide { display: flex; flex-direction: column; }
 .slidev-layout.rc-slide .rc-center { margin: auto 0; }
+
+/* tesis: oración legible y contenido repartido en todo el alto */
+.slidev-layout.ts-slide { display: flex; flex-direction: column; }
+.slidev-layout .ts-quote { font-size: 1.6rem; font-weight: 300; line-height: 1.45; color: var(--ink); opacity: 1; margin: .2rem 0 0; max-width: 56rem; }
+.slidev-layout .ts-quote b { color: var(--leaf); font-weight: 500; }
+.slidev-layout.ts-slide .ts-strip { margin: auto 0; }
+
+/* la intervención: f = g∘h → h' → g(h) vs g(h') */
+.slidev-layout.iv-slide { display: flex; flex-direction: column; }
+.slidev-layout.iv-slide .iv { margin: auto 0; display: flex; flex-direction: column; gap: 1.4rem; }
+.slidev-layout .iv-row { display: grid; grid-template-columns: 17rem 1fr; align-items: center; gap: 2rem; }
+.slidev-layout .iv-eq .katex-display { margin: 0; text-align: left; }
+.slidev-layout .iv-eq .katex { font-size: 1.55rem; }
+.slidev-layout .iv-leg, .slidev-layout .iv-terms { font-family: var(--font-mono); font-size: .82rem; display: flex; flex-direction: column; gap: .3rem; opacity: .85; }
+.slidev-layout .iv-leg .k, .slidev-layout .iv-terms .k { display: inline-block; min-width: 6.2rem; color: var(--accent); font-weight: 500; }
+.slidev-layout .iv-def .katex-display { margin: 0 0 .5rem; text-align: left; }
+.slidev-layout .iv-def .katex { font-size: 1.15rem; }
+.slidev-layout .iv-patch { padding-top: 1.2rem; border-top: 1px dashed var(--accent-soft); }
+.slidev-layout .iv-cmp { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: stretch; padding-top: 1.2rem; border-top: 1px dashed var(--accent-soft); }
+.slidev-layout .iv-cmp .c { border: 1px solid; border-radius: 6px; padding: .7rem 1rem; display: flex; flex-direction: column; align-items: center; gap: .3rem; }
+.slidev-layout .iv-cmp .c p { margin: 0; }
+.slidev-layout .iv-cmp .c .katex { font-size: 1.35rem; }
+.slidev-layout .iv-cmp .bad { border-color: rgba(255, 111, 89, .6); background: rgba(255, 111, 89, .07); }
+.slidev-layout .iv-cmp .good { border-color: rgba(255, 194, 75, .7); background: rgba(255, 194, 75, .08); }
+.slidev-layout .iv-cmp .r { font-family: var(--font-mono); font-size: .8rem; opacity: .85; }
+.slidev-layout .iv-cmp .bad .r { color: var(--coral); }
+.slidev-layout .iv-cmp .good .r { color: var(--sun); }
+.slidev-layout .iv-cmp .vs { align-self: center; font-family: var(--font-mono); font-size: .9rem; opacity: .5; }
+.slidev-layout .iv-concl { grid-column: 1 / -1; text-align: center; font-family: var(--font-mono); font-size: .85rem; opacity: .9; margin-top: .2rem; }

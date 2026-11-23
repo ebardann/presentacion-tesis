@@ -22,7 +22,6 @@ const J = bot[4]
       <text :x="I.x + 9" y="64" class="dl">d(i, j) &lt; τ</text>
       <text x="214" y="64" class="dim">N → C</text>
     </svg>
-    <div class="cap">contacto en las <b>coordenadas finales</b> · Cβ, τ = 8 Å</div>
   </div>
 </template>
 
@@ -36,6 +35,4 @@ svg { width: 100%; height: auto; display: block; overflow: visible; }
 .lab { fill: var(--sun); font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
 .dl { fill: var(--sun); font-family: var(--font-mono); font-size: 11px; }
 .dim { fill: var(--ink); font-family: var(--font-mono); font-size: 9px; opacity: .4; }
-.cap { font-family: var(--font-mono); font-size: 10px; line-height: 1.35; opacity: .65; margin-top: .25rem; }
-.cap b { font-weight: 500; }
 </style>
